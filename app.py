@@ -1,9 +1,11 @@
+
 import streamlit as st
 import pandas as pd
 import joblib
 
 from evidence_engine import EvidenceEngine
 from decision_engine import DecisionEngine
+from audit_pipeline import AuditPipeline
 
 
 # ==========================================
@@ -63,8 +65,19 @@ def load_model():
 
 model, feature_columns = load_model()
 
+
+# ==========================================
+# INITIALIZE ENGINES
+# ==========================================
+
 evidence_engine = EvidenceEngine()
+
 decision_engine = DecisionEngine()
+
+audit_pipeline = AuditPipeline(
+    evidence_engine,
+    decision_engine
+)
 
 
 # ==========================================
@@ -196,6 +209,10 @@ analyze_button = st.button(
 
 if analyze_button:
 
+    # ======================================
+    # BUILD CASE
+    # ======================================
+
     case = {
 
         "dispute_id": dispute_id,
@@ -216,9 +233,9 @@ if analyze_button:
     }
 
 
-    # --------------------------------------
+    # ======================================
     # ML PREDICTION
-    # --------------------------------------
+    # ======================================
 
     X = prepare_features(case)
 
@@ -229,25 +246,56 @@ if analyze_button:
     ml_confidence = max(probabilities) * 100
 
 
-    # --------------------------------------
-    # EVIDENCE ANALYSIS
-    # --------------------------------------
+    # ======================================
+    # COMPLETE AUDIT PIPELINE
+    # ======================================
 
-    evidence = evidence_engine.analyze(case)
-
-
-    # --------------------------------------
-    # FINAL DECISION
-    # --------------------------------------
-
-    result = decision_engine.decide(
+    audit_result = audit_pipeline.analyze(
         case,
-        ml_prediction
+        ml_prediction,
+        ml_confidence
     )
 
 
     # ======================================
-    # HEADER
+    # EXTRACT RESULTS
+    # ======================================
+
+    evidence_score = audit_result[
+        "evidence_score"
+    ]
+
+    evidence_level = audit_result[
+        "evidence_level"
+    ]
+
+    contradiction = audit_result[
+        "contradiction_detected"
+    ]
+
+    evidence_reasons = audit_result[
+        "evidence_reasons"
+    ]
+
+    warnings = audit_result[
+        "warnings"
+    ]
+
+    evidence_breakdown = audit_result[
+        "evidence_breakdown"
+    ]
+
+    final_decision = audit_result[
+        "final_decision"
+    ]
+
+    decision_reason = audit_result[
+        "decision_reason"
+    ]
+
+
+    # ======================================
+    # AI ANALYSIS RESULT
     # ======================================
 
     st.divider()
@@ -274,14 +322,14 @@ if analyze_button:
 
         st.metric(
             "Evidence Score",
-            f"{evidence['evidence_score']} / 100"
+            f"{evidence_score} / 100"
         )
 
     with col4:
 
         st.metric(
             "Evidence Level",
-            evidence["evidence_level"]
+            evidence_level
         )
 
 
@@ -290,8 +338,6 @@ if analyze_button:
     # ======================================
 
     st.subheader("⚖️ Final Decision")
-
-    final_decision = result["decision"]
 
     if final_decision == "CONTEST":
 
@@ -314,12 +360,31 @@ if analyze_button:
 
     st.write(
         "**Decision Reason:**",
-        result["reason"]
+        decision_reason
     )
 
 
     # ======================================
-    # EVIDENCE
+    # CONTRADICTION STATUS
+    # ======================================
+
+    st.subheader("🔍 Evidence Consistency")
+
+    if contradiction:
+
+        st.error(
+            "⚠️ Contradiction detected in dispute evidence."
+        )
+
+    else:
+
+        st.success(
+            "✅ No direct contradiction detected."
+        )
+
+
+    # ======================================
+    # EVIDENCE ANALYSIS
     # ======================================
 
     st.subheader("📋 Evidence Analysis")
@@ -330,9 +395,9 @@ if analyze_button:
 
         st.write("### Evidence Reasons")
 
-        if evidence["reasons"]:
+        if evidence_reasons:
 
-            for item in evidence["reasons"]:
+            for item in evidence_reasons:
 
                 st.write(
                     f"• {item}"
@@ -340,16 +405,18 @@ if analyze_button:
 
         else:
 
-            st.write("No supporting evidence found.")
+            st.write(
+                "No supporting evidence found."
+            )
 
 
     with col2:
 
         st.write("### Warnings")
 
-        if evidence["warnings"]:
+        if warnings:
 
-            for warning in evidence["warnings"]:
+            for warning in warnings:
 
                 st.warning(
                     warning
@@ -358,8 +425,55 @@ if analyze_button:
         else:
 
             st.success(
-                "No contradictions or warnings detected."
+                "No warnings detected."
             )
+
+
+    # ======================================
+    # EVIDENCE BREAKDOWN
+    # ======================================
+
+    st.subheader("📈 Evidence Breakdown")
+
+    breakdown_df = pd.DataFrame(
+        {
+            "Evidence Type": [
+                "Delivery Evidence",
+                "Delivery Proof",
+                "Refund Evidence",
+                "Communication",
+                "Consistency"
+            ],
+
+            "Score": [
+                evidence_breakdown[
+                    "delivery_evidence"
+                ],
+
+                evidence_breakdown[
+                    "delivery_proof"
+                ],
+
+                evidence_breakdown[
+                    "refund_evidence"
+                ],
+
+                evidence_breakdown[
+                    "communication_evidence"
+                ],
+
+                evidence_breakdown[
+                    "consistency"
+                ]
+            ]
+        }
+    )
+
+    st.dataframe(
+        breakdown_df,
+        use_container_width=True,
+        hide_index=True
+    )
 
 
     # ======================================
@@ -395,7 +509,7 @@ if analyze_button:
 
 
     # ======================================
-    # CUSTOMER / MERCHANT MESSAGES
+    # COMMUNICATION EVIDENCE
     # ======================================
 
     st.subheader("💬 Communication Evidence")
@@ -420,6 +534,33 @@ if analyze_button:
 
 
     # ======================================
+    # PIPELINE SUMMARY
+    # ======================================
+
+    st.subheader("🔗 Decision Pipeline")
+
+    st.write(
+        "1️⃣ Machine Learning Prediction"
+    )
+
+    st.write(
+        "2️⃣ Evidence Analysis"
+    )
+
+    st.write(
+        "3️⃣ Contradiction Detection"
+    )
+
+    st.write(
+        "4️⃣ Rule-Based Decision"
+    )
+
+    st.write(
+        "5️⃣ Final Decision"
+    )
+
+
+    # ======================================
     # SYSTEM STATUS
     # ======================================
 
@@ -427,6 +568,9 @@ if analyze_button:
 
     st.caption(
         "ChargebackGuard AI combines ML prediction, "
-        "evidence analysis and rule-based safety checks. "
-        "This is a decision-support system, not an automatic payment decision."
+        "evidence analysis, contradiction detection "
+        "and rule-based safety checks. "
+        "This is a decision-support system, not an "
+        "automatic payment decision."
     )
+

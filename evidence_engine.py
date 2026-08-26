@@ -11,9 +11,9 @@ class EvidenceEngine:
 
         contradiction_detected = False
 
-        # -----------------------------------
+        # ==========================================
         # NORMALIZE INPUT
-        # -----------------------------------
+        # ==========================================
 
         delivery_status = str(
             case.get("delivery_status", "")
@@ -39,9 +39,9 @@ class EvidenceEngine:
             case.get("merchant_message", "")
         ).strip().lower()
 
-        # -----------------------------------
+        # ==========================================
         # DELIVERY EVIDENCE
-        # -----------------------------------
+        # ==========================================
 
         delivery_score = 0
 
@@ -67,9 +67,9 @@ class EvidenceEngine:
 
         score += delivery_score
 
-        # -----------------------------------
+        # ==========================================
         # DELIVERY PROOF
-        # -----------------------------------
+        # ==========================================
 
         delivery_proof_score = 0
 
@@ -89,9 +89,9 @@ class EvidenceEngine:
 
         score += delivery_proof_score
 
-        # -----------------------------------
+        # ==========================================
         # REFUND STATUS
-        # -----------------------------------
+        # ==========================================
 
         refund_score = 0
 
@@ -111,9 +111,9 @@ class EvidenceEngine:
 
         score += refund_score
 
-        # -----------------------------------
+        # ==========================================
         # DISPUTE REASON
-        # -----------------------------------
+        # ==========================================
 
         if reason == "product_not_received":
 
@@ -139,97 +139,170 @@ class EvidenceEngine:
                 "Duplicate charge requires transaction verification"
             )
 
-        # -----------------------------------
-        # CUSTOMER MESSAGE
-        # -----------------------------------
+        # ==========================================
+        # CUSTOMER MESSAGE ANALYSIS
+        # ==========================================
 
         customer_not_received = any(
             phrase in customer_message
             for phrase in [
+
                 "never received",
                 "did not receive",
                 "didn't receive",
                 "not received",
+                "have not received",
+                "haven't received",
+
                 "never got",
                 "did not get",
                 "didn't get",
-                "have not received",
-                "haven't received",
+
                 "i do not have my order",
-                "i don't have my order"
+                "i don't have my order",
+
+                "order never arrived",
+                "order did not arrive",
+                "order didn't arrive",
+
+                "package never arrived",
+                "package did not arrive",
+                "package didn't arrive",
+
+                "product never arrived",
+                "product did not arrive",
+                "product didn't arrive"
             ]
         )
+
+        # ==========================================
+        # CUSTOMER PREVIOUSLY CONFIRMED RECEIPT
+        # ==========================================
 
         customer_previous_receipt = any(
             phrase in customer_message
             for phrase in [
-                "previously confirmed",
-                "previously said",
-                "previously stated",
-                "earlier confirmed",
-                "earlier said",
-                "earlier stated",
+
+                "previously confirmed receipt",
+                "previously confirmed that i received",
+
+                "previously confirmed that the order was received",
+                "previously confirmed that the product was received",
+                "previously confirmed that the package was received",
+
+                "previously said that i received",
+                "previously stated that i received",
+
+                "earlier confirmed receipt",
+                "earlier confirmed that i received",
+
+                "earlier said that i received",
+                "earlier stated that i received",
+
+                "confirmed receipt",
                 "confirmed that the order was received",
                 "confirmed that the product was received",
-                "confirmed receipt",
-                "said that the order was received",
-                "said that the product was received",
-                "stated that the order was received",
-                "stated that the product was received"
+                "confirmed that the package was received"
             ]
         )
+
+        # ==========================================
+        # CUSTOMER DIRECTLY CONFIRMS RECEIPT
+        # ==========================================
 
         customer_received = any(
             phrase in customer_message
             for phrase in [
+
                 "i received the product",
                 "i received my order",
+                "i received the order",
+                "i received my package",
+                "i received the package",
+
                 "i got the product",
                 "i got my order",
+                "i got the order",
+                "i got my package",
+                "i got the package",
+
                 "i have received the product",
-                "i have received my order"
+                "i have received my order",
+                "i have received the order",
+                "i have received my package",
+                "i have received the package",
+
+                "my order arrived",
+                "my package arrived",
+                "the package arrived",
+                "the order arrived",
+                "the product arrived",
+
+                "i got it",
+                "i received it"
             ]
         )
 
-        # -----------------------------------
-        # MERCHANT MESSAGE
-        # -----------------------------------
+        # ==========================================
+        # MERCHANT MESSAGE ANALYSIS
+        # ==========================================
 
         merchant_confirmed = any(
             phrase in merchant_message
             for phrase in [
+
+                # Explicit confirmation
+
                 "customer confirmed receipt",
-                "customer confirmed",
-                "confirmed receipt",
+                "customer confirmed that they received",
+                "customer confirmed that he received",
+                "customer confirmed that she received",
+
+                # Customer received item
+
                 "customer received the product",
                 "customer received the order",
+                "customer received the package",
+
                 "customer has received the product",
                 "customer has received the order",
+                "customer has received the package",
 
-                # Important:
-                # Merchant can report that the
-                # customer previously confirmed receipt.
+                "customer got the product",
+                "customer got the order",
+                "customer got the package",
 
-                "customer previously confirmed",
-                "customer previously said",
-                "customer previously stated",
-                "customer earlier confirmed",
-                "customer earlier said",
-                "customer earlier stated",
+                # Dataset edge-case wording
 
-                "previously confirmed that the order was received",
-                "previously confirmed that the product was received",
-                "previously confirmed receipt",
+                "customer was already received the package",
+                "customer already received the package",
 
-                "earlier confirmed that the order was received",
-                "earlier confirmed that the product was received",
-                "earlier confirmed receipt"
+                # Previous confirmation
+
+                "customer previously confirmed receipt",
+                "customer previously confirmed that they received",
+
+                "customer previously confirmed that the order was received",
+                "customer previously confirmed that the product was received",
+                "customer previously confirmed that the package was received",
+
+                "customer earlier confirmed receipt",
+                "customer earlier confirmed that they received",
+
+                "customer earlier confirmed that the order was received",
+                "customer earlier confirmed that the product was received",
+
+                "customer previously said they received",
+                "customer previously said that they received",
+
+                "customer previously stated they received",
+                "customer previously stated that they received"
             ]
         )
 
-        # -----------------------------------
+        # ==========================================
         # COMMUNICATION SCORE
-        # -----------------------------------
+        # ==========================================
 
         communication_score = 0
 
@@ -245,10 +318,11 @@ class EvidenceEngine:
 
             communication_score += 7
 
-        # -----------------------------------
+        # ==========================================
         # CONTRADICTION DETECTION
-        # -----------------------------------
+        # ==========================================
 
+        # CASE 1:
         # Customer denies receipt but previously
         # confirmed receipt.
 
@@ -263,9 +337,9 @@ class EvidenceEngine:
                 "Customer message contains conflicting receipt statements"
             )
 
-        # Merchant says customer previously
-        # confirmed receipt while customer now
-        # denies receiving the order.
+        # CASE 2:
+        # Customer denies receipt but merchant says
+        # customer received/confirmed receipt.
 
         if (
             merchant_confirmed
@@ -278,13 +352,27 @@ class EvidenceEngine:
                 "Merchant states customer previously confirmed receipt while customer denies receipt"
             )
 
-        # -----------------------------------
-        # DELIVERY VS CUSTOMER CLAIM
-        # -----------------------------------
+        # CASE 3:
+        # Customer message itself contains both
+        # received and not-received claims.
 
-        # Delivered + customer denial is treated
-        # as conflicting evidence, but not by itself
-        # as a contradiction.
+        if (
+            customer_received
+            and customer_not_received
+        ):
+
+            contradiction_detected = True
+
+            warnings.append(
+                "Customer message contains conflicting receipt claims"
+            )
+
+        # ==========================================
+        # DELIVERY VS CUSTOMER CLAIM
+        # ==========================================
+
+        # Delivered + customer denial is suspicious,
+        # but NOT automatically a contradiction.
 
         if (
             delivery_status == "delivered"
@@ -295,11 +383,15 @@ class EvidenceEngine:
                 "Customer disputes receipt despite delivery record showing delivered"
             )
 
-        # -----------------------------------
+        # ==========================================
         # CONSISTENCY SCORE
-        # -----------------------------------
+        # ==========================================
 
         consistency_score = 0
+
+        # Strong delivery evidence + customer denial.
+        # This is suspicious but not an explicit
+        # communication contradiction.
 
         if (
             delivery_status == "delivered"
@@ -310,6 +402,8 @@ class EvidenceEngine:
 
             consistency_score = 20
 
+        # Explicit merchant/customer conflict.
+
         elif (
             merchant_confirmed
             and customer_not_received
@@ -317,12 +411,16 @@ class EvidenceEngine:
 
             consistency_score = 0
 
+        # Customer confirms receipt.
+
         elif (
             customer_received
             and not customer_not_received
         ):
 
             consistency_score = 20
+
+        # Delivery failed + customer says not received.
 
         elif (
             delivery_status == "failed"
@@ -334,18 +432,18 @@ class EvidenceEngine:
         score += communication_score
         score += consistency_score
 
-        # -----------------------------------
+        # ==========================================
         # SCORE BOUNDARY
-        # -----------------------------------
+        # ==========================================
 
         score = max(
             0,
             min(score, self.max_score)
         )
 
-        # -----------------------------------
+        # ==========================================
         # EVIDENCE LEVEL
-        # -----------------------------------
+        # ==========================================
 
         if score >= 70:
 
@@ -359,9 +457,9 @@ class EvidenceEngine:
 
             evidence_level = "WEAK"
 
-        # -----------------------------------
+        # ==========================================
         # RETURN RESULT
-        # -----------------------------------
+        # ==========================================
 
         return {
 
@@ -396,9 +494,9 @@ class EvidenceEngine:
         }
 
 
-# -------------------------------------------
-# TEST
-# -------------------------------------------
+# ==========================================
+# LOCAL TEST
+# ==========================================
 
 if __name__ == "__main__":
 
@@ -480,7 +578,7 @@ if __name__ == "__main__":
     ]
 
     print("===== CHARGEBACKGUARD AI =====")
-    print("Evidence Engine V5 Test")
+    print("Evidence Engine V7 Test")
     print()
 
     for case in test_cases:
