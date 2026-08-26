@@ -1,0 +1,201 @@
+dispute_id,amount,reason,delivery_status,delivery_proof,refund_status,customer_message,merchant_message,transaction_date,delivery_date,ground_truth
+CB00001,10976,product_not_received,delivered,True,issued,I received the product but there is an issue.,Customer contacted support.,2026-07-30,2026-08-08,DO_NOT_CONTEST
+CB00002,1924,unauthorized_transaction,delivered,True,not_issued,I received the product but there is an issue.,Customer contacted support.,2026-04-18,2026-04-28,CONTEST
+CB00003,934,product_not_as_described,unknown,True,issued,I was charged twice.,No customer communication was received.,2026-06-15,2026-06-16,DO_NOT_CONTEST
+CB00004,12932,product_not_as_described,unknown,False,issued,I don't recognize this transaction.,Customer contacted support.,2026-07-01,2026-07-07,DO_NOT_CONTEST
+CB00005,2174,product_not_received,failed,False,not_issued,I don't recognize this transaction.,No customer communication was received.,2026-06-19,2026-06-20,DO_NOT_CONTEST
+CB00006,12455,unauthorized_transaction,unknown,False,not_issued,I did not receive my order.,No customer communication was received.,2026-06-11,2026-06-21,HUMAN_REVIEW
+CB00007,14618,duplicate_charge,unknown,True,not_issued,I did not receive my order.,Customer contacted support.,2026-06-12,2026-06-14,HUMAN_REVIEW
+CB00008,14513,product_not_as_described,delivered,False,issued,I was charged twice.,Delivery was completed.,2026-07-15,2026-07-21,DO_NOT_CONTEST
+CB00009,6320,product_not_as_described,unknown,True,issued,The product I received is different from what I ordered.,Customer contacted support.,2026-04-11,2026-04-15,DO_NOT_CONTEST
+CB00010,3177,unauthorized_transaction,failed,True,issued,I don't recognize this transaction.,Order was processed normally.,2026-06-28,2026-06-29,DO_NOT_CONTEST
+CB00011,13689,duplicate_charge,failed,True,issued,I received the product but there is an issue.,No customer communication was received.,2026-06-06,2026-06-10,DO_NOT_CONTEST
+CB00012,11238,unauthorized_transaction,failed,True,issued,I don't recognize this transaction.,Customer contacted support.,2026-06-23,2026-07-02,DO_NOT_CONTEST
+CB00013,9330,duplicate_charge,unknown,False,issued,I don't recognize this transaction.,Customer contacted support.,2026-07-21,2026-07-30,DO_NOT_CONTEST
+CB00014,8585,product_not_received,delivered,True,not_issued,I received the product but there is an issue.,Refund request was received.,2026-03-26,2026-03-28,CONTEST
+CB00015,6804,unauthorized_transaction,unknown,False,issued,The product I received is different from what I ordered.,Order was processed normally.,2026-03-04,2026-03-06,DO_NOT_CONTEST
+CB00016,11669,duplicate_charge,unknown,True,issued,I don't recognize this transaction.,Refund request was received.,2026-07-16,2026-07-24,DO_NOT_CONTEST
+CB00017,553,duplicate_charge,unknown,True,not_issued,I don't recognize this transaction.,No customer communication was received.,2026-03-23,2026-03-27,HUMAN_REVIEW
+CB00018,3004,duplicate_charge,delivered,False,not_issued,I was charged twice.,Order was processed normally.,2026-07-28,2026-08-03,HUMAN_REVIEW
+CB00019,14896,duplicate_charge,delivered,True,not_issued,The product I received is different from what I ordered.,Order was processed normally.,2026-08-04,2026-08-12,CONTEST
+CB00020,13869,product_not_received,unknown,True,not_issued,I was charged twice.,No customer communication was received.,2026-07-14,2026-07-19,HUMAN_REVIEW
+CB00021,9145,unauthorized_transaction,delivered,False,not_issued,I was charged twice.,Delivery was completed.,2026-05-05,2026-05-14,HUMAN_REVIEW
+CB00022,7897,product_not_received,delivered,True,not_issued,I don't recognize this transaction.,Order was processed normally.,2026-03-28,2026-04-06,CONTEST
+CB00023,4270,product_not_as_described,delivered,True,not_issued,I received the product but there is an issue.,Order was processed normally.,2026-08-17,2026-08-23,CONTEST
+CB00024,1660,product_not_as_described,failed,True,issued,The product I received is different from what I ordered.,Customer contacted support.,2026-04-01,2026-04-11,DO_NOT_CONTEST
+CB00025,8244,product_not_as_described,failed,True,issued,I did not receive my order.,Order was processed normally.,2026-03-10,2026-03-17,DO_NOT_CONTEST
+CB00026,6304,unauthorized_transaction,failed,True,issued,I did not receive my order.,Order was processed normally.,2026-05-14,2026-05-20,DO_NOT_CONTEST
+CB00027,13616,product_not_received,delivered,True,not_issued,The product I received is different from what I ordered.,Refund request was received.,2026-07-21,2026-07-28,CONTEST
+CB00028,3506,duplicate_charge,failed,True,not_issued,I was charged twice.,No customer communication was received.,2026-07-31,2026-08-01,DO_NOT_CONTEST
+CB00029,11184,product_not_received,delivered,True,not_issued,I was charged twice.,Refund request was received.,2026-04-24,2026-04-28,CONTEST
+CB00030,14666,unauthorized_transaction,delivered,False,not_issued,I did not receive my order.,Refund request was received.,2026-06-19,2026-06-27,HUMAN_REVIEW
+CB00031,5173,unauthorized_transaction,unknown,True,issued,I received the product but there is an issue.,Delivery was completed.,2026-07-01,2026-07-02,DO_NOT_CONTEST
+CB00032,9989,product_not_received,unknown,True,issued,I did not receive my order.,No customer communication was received.,2026-04-25,2026-05-04,DO_NOT_CONTEST
+CB00033,14470,product_not_as_described,delivered,True,not_issued,I did not receive my order.,No customer communication was received.,2026-08-08,2026-08-12,CONTEST
+CB00034,7115,product_not_received,unknown,True,not_issued,The product I received is different from what I ordered.,Order was processed normally.,2026-05-10,2026-05-20,HUMAN_REVIEW
+CB00035,9760,duplicate_charge,failed,False,not_issued,I received the product but there is an issue.,Delivery was completed.,2026-05-16,2026-05-19,DO_NOT_CONTEST
+CB00036,11504,duplicate_charge,failed,True,issued,I did not receive my order.,Refund request was received.,2026-03-19,2026-03-29,DO_NOT_CONTEST
+CB00037,2138,product_not_received,unknown,False,not_issued,I received the product but there is an issue.,Delivery was completed.,2026-08-08,2026-08-12,HUMAN_REVIEW
+CB00038,6554,duplicate_charge,delivered,False,issued,The product I received is different from what I ordered.,No customer communication was received.,2026-08-23,2026-09-01,DO_NOT_CONTEST
+CB00039,5405,product_not_received,delivered,True,issued,I did not receive my order.,No customer communication was received.,2026-07-17,2026-07-22,DO_NOT_CONTEST
+CB00040,5116,product_not_as_described,unknown,True,issued,I don't recognize this transaction.,No customer communication was received.,2026-04-22,2026-04-27,DO_NOT_CONTEST
+CB00041,14362,product_not_received,delivered,False,issued,I did not receive my order.,Order was processed normally.,2026-06-01,2026-06-04,DO_NOT_CONTEST
+CB00042,10938,duplicate_charge,delivered,False,issued,The product I received is different from what I ordered.,Order was processed normally.,2026-07-28,2026-07-30,DO_NOT_CONTEST
+CB00043,14968,product_not_as_described,unknown,False,not_issued,The product I received is different from what I ordered.,No customer communication was received.,2026-07-19,2026-07-26,HUMAN_REVIEW
+CB00044,2588,product_not_received,failed,True,issued,I don't recognize this transaction.,Customer contacted support.,2026-03-04,2026-03-08,DO_NOT_CONTEST
+CB00045,11427,product_not_received,failed,True,issued,I received the product but there is an issue.,Customer contacted support.,2026-07-11,2026-07-18,DO_NOT_CONTEST
+CB00046,906,product_not_as_described,unknown,False,issued,I received the product but there is an issue.,Delivery was completed.,2026-07-16,2026-07-18,DO_NOT_CONTEST
+CB00047,6767,product_not_received,failed,True,not_issued,I was charged twice.,Delivery was completed.,2026-06-08,2026-06-12,DO_NOT_CONTEST
+CB00048,4152,product_not_received,unknown,False,not_issued,I don't recognize this transaction.,Delivery was completed.,2026-08-08,2026-08-13,HUMAN_REVIEW
+CB00049,6253,unauthorized_transaction,unknown,True,issued,I did not receive my order.,Delivery was completed.,2026-07-11,2026-07-21,DO_NOT_CONTEST
+CB00050,4849,product_not_received,delivered,False,issued,I don't recognize this transaction.,Refund request was received.,2026-03-23,2026-04-01,DO_NOT_CONTEST
+CB00051,2394,unauthorized_transaction,unknown,False,not_issued,I did not receive my order.,Refund request was received.,2026-08-25,2026-09-03,HUMAN_REVIEW
+CB00052,13713,product_not_as_described,failed,True,issued,I don't recognize this transaction.,No customer communication was received.,2026-06-06,2026-06-08,DO_NOT_CONTEST
+CB00053,12292,duplicate_charge,unknown,False,issued,I don't recognize this transaction.,Refund request was received.,2026-02-28,2026-03-05,DO_NOT_CONTEST
+CB00054,9583,product_not_as_described,delivered,False,issued,I received the product but there is an issue.,No customer communication was received.,2026-04-02,2026-04-07,DO_NOT_CONTEST
+CB00055,7153,product_not_received,failed,True,issued,I was charged twice.,No customer communication was received.,2026-03-23,2026-03-29,DO_NOT_CONTEST
+CB00056,8118,unauthorized_transaction,failed,False,not_issued,I received the product but there is an issue.,Order was processed normally.,2026-06-14,2026-06-23,DO_NOT_CONTEST
+CB00057,11376,duplicate_charge,delivered,False,not_issued,I received the product but there is an issue.,Customer contacted support.,2026-07-19,2026-07-20,HUMAN_REVIEW
+CB00058,1257,product_not_as_described,failed,False,not_issued,I was charged twice.,No customer communication was received.,2026-07-07,2026-07-14,DO_NOT_CONTEST
+CB00059,8599,unauthorized_transaction,delivered,True,not_issued,I did not receive my order.,Refund request was received.,2026-06-30,2026-07-03,CONTEST
+CB00060,13674,unauthorized_transaction,delivered,True,not_issued,I was charged twice.,Customer contacted support.,2026-04-29,2026-05-08,CONTEST
+CB00061,9657,duplicate_charge,failed,False,issued,I received the product but there is an issue.,Refund request was received.,2026-05-02,2026-05-07,DO_NOT_CONTEST
+CB00062,12817,product_not_as_described,unknown,False,issued,I received the product but there is an issue.,Delivery was completed.,2026-05-05,2026-05-07,DO_NOT_CONTEST
+CB00063,12190,duplicate_charge,delivered,False,issued,I don't recognize this transaction.,No customer communication was received.,2026-08-05,2026-08-08,DO_NOT_CONTEST
+CB00064,2971,product_not_as_described,failed,True,not_issued,I did not receive my order.,Refund request was received.,2026-05-13,2026-05-19,DO_NOT_CONTEST
+CB00065,9390,unauthorized_transaction,failed,True,not_issued,I was charged twice.,Refund request was received.,2026-03-29,2026-03-30,DO_NOT_CONTEST
+CB00066,14536,unauthorized_transaction,failed,False,not_issued,I don't recognize this transaction.,Refund request was received.,2026-05-10,2026-05-19,DO_NOT_CONTEST
+CB00067,12747,product_not_as_described,failed,False,not_issued,I was charged twice.,Refund request was received.,2026-08-18,2026-08-25,DO_NOT_CONTEST
+CB00068,6007,unauthorized_transaction,unknown,False,not_issued,I received the product but there is an issue.,No customer communication was received.,2026-04-11,2026-04-12,HUMAN_REVIEW
+CB00069,6955,product_not_received,delivered,True,issued,I was charged twice.,Customer contacted support.,2026-08-13,2026-08-18,DO_NOT_CONTEST
+CB00070,6711,duplicate_charge,delivered,False,issued,I don't recognize this transaction.,Refund request was received.,2026-06-15,2026-06-22,DO_NOT_CONTEST
+CB00071,4633,product_not_received,failed,True,not_issued,I don't recognize this transaction.,Customer contacted support.,2026-03-12,2026-03-14,DO_NOT_CONTEST
+CB00072,13299,product_not_received,delivered,True,not_issued,I did not receive my order.,No customer communication was received.,2026-07-17,2026-07-21,CONTEST
+CB00073,2568,unauthorized_transaction,unknown,True,not_issued,I was charged twice.,Delivery was completed.,2026-05-23,2026-05-26,HUMAN_REVIEW
+CB00074,10426,product_not_received,delivered,True,issued,The product I received is different from what I ordered.,Order was processed normally.,2026-06-07,2026-06-17,DO_NOT_CONTEST
+CB00075,11597,unauthorized_transaction,failed,True,not_issued,The product I received is different from what I ordered.,Customer contacted support.,2026-07-30,2026-08-04,DO_NOT_CONTEST
+CB00076,14431,product_not_received,unknown,False,not_issued,The product I received is different from what I ordered.,Refund request was received.,2026-03-09,2026-03-15,HUMAN_REVIEW
+CB00077,1629,duplicate_charge,delivered,False,issued,I did not receive my order.,Refund request was received.,2026-05-25,2026-06-02,DO_NOT_CONTEST
+CB00078,12088,product_not_as_described,failed,False,not_issued,The product I received is different from what I ordered.,No customer communication was received.,2026-04-24,2026-05-02,DO_NOT_CONTEST
+CB00079,7636,duplicate_charge,failed,True,not_issued,I don't recognize this transaction.,Refund request was received.,2026-06-24,2026-07-02,DO_NOT_CONTEST
+CB00080,9836,unauthorized_transaction,failed,False,not_issued,I don't recognize this transaction.,Customer contacted support.,2026-04-23,2026-04-27,DO_NOT_CONTEST
+CB00081,6313,duplicate_charge,failed,False,issued,The product I received is different from what I ordered.,Order was processed normally.,2026-04-15,2026-04-19,DO_NOT_CONTEST
+CB00082,1902,product_not_as_described,unknown,False,issued,The product I received is different from what I ordered.,Customer contacted support.,2026-03-02,2026-03-10,DO_NOT_CONTEST
+CB00083,11082,unauthorized_transaction,failed,True,not_issued,I don't recognize this transaction.,Customer contacted support.,2026-05-14,2026-05-18,DO_NOT_CONTEST
+CB00084,5516,duplicate_charge,failed,False,issued,The product I received is different from what I ordered.,Delivery was completed.,2026-05-27,2026-06-04,DO_NOT_CONTEST
+CB00085,4938,duplicate_charge,failed,True,not_issued,I received the product but there is an issue.,Delivery was completed.,2026-07-26,2026-08-04,DO_NOT_CONTEST
+CB00086,12987,product_not_as_described,delivered,False,not_issued,I don't recognize this transaction.,No customer communication was received.,2026-04-13,2026-04-23,HUMAN_REVIEW
+CB00087,5136,product_not_received,delivered,True,issued,I don't recognize this transaction.,Customer contacted support.,2026-06-09,2026-06-10,DO_NOT_CONTEST
+CB00088,12100,product_not_as_described,failed,True,not_issued,The product I received is different from what I ordered.,Delivery was completed.,2026-02-28,2026-03-03,DO_NOT_CONTEST
+CB00089,10950,unauthorized_transaction,delivered,False,not_issued,I was charged twice.,Refund request was received.,2026-05-05,2026-05-11,HUMAN_REVIEW
+CB00090,3520,product_not_received,failed,True,issued,I did not receive my order.,Refund request was received.,2026-04-22,2026-04-24,DO_NOT_CONTEST
+CB00091,9953,product_not_received,delivered,False,not_issued,I did not receive my order.,Customer contacted support.,2026-07-26,2026-08-04,HUMAN_REVIEW
+CB00092,13024,unauthorized_transaction,unknown,False,not_issued,I was charged twice.,Refund request was received.,2026-06-10,2026-06-20,HUMAN_REVIEW
+CB00093,7525,duplicate_charge,unknown,True,not_issued,I received the product but there is an issue.,Customer contacted support.,2026-06-19,2026-06-21,HUMAN_REVIEW
+CB00094,3073,product_not_as_described,delivered,True,not_issued,I did not receive my order.,Refund request was received.,2026-05-02,2026-05-12,CONTEST
+CB00095,8199,duplicate_charge,delivered,False,not_issued,I don't recognize this transaction.,Refund request was received.,2026-08-07,2026-08-11,HUMAN_REVIEW
+CB00096,4834,product_not_as_described,failed,True,not_issued,I received the product but there is an issue.,Delivery was completed.,2026-07-20,2026-07-22,DO_NOT_CONTEST
+CB00097,1477,product_not_as_described,failed,False,issued,I did not receive my order.,Refund request was received.,2026-03-02,2026-03-07,DO_NOT_CONTEST
+CB00098,11964,unauthorized_transaction,failed,False,issued,I did not receive my order.,No customer communication was received.,2026-08-15,2026-08-22,DO_NOT_CONTEST
+CB00099,12534,duplicate_charge,unknown,True,issued,I did not receive my order.,Customer contacted support.,2026-03-06,2026-03-16,DO_NOT_CONTEST
+CB00100,10119,product_not_received,unknown,True,issued,I received the product but there is an issue.,Refund request was received.,2026-04-15,2026-04-23,DO_NOT_CONTEST
+CB00101,5057,product_not_as_described,unknown,False,issued,I did not receive my order.,Refund request was received.,2026-05-28,2026-06-04,DO_NOT_CONTEST
+CB00102,5960,duplicate_charge,unknown,True,not_issued,I don't recognize this transaction.,Refund request was received.,2026-03-01,2026-03-09,HUMAN_REVIEW
+CB00103,5222,unauthorized_transaction,unknown,False,not_issued,I did not receive my order.,Delivery was completed.,2026-06-22,2026-06-28,HUMAN_REVIEW
+CB00104,2399,unauthorized_transaction,unknown,False,not_issued,I was charged twice.,Order was processed normally.,2026-07-08,2026-07-17,HUMAN_REVIEW
+CB00105,6427,unauthorized_transaction,unknown,True,issued,I received the product but there is an issue.,Delivery was completed.,2026-04-07,2026-04-10,DO_NOT_CONTEST
+CB00106,5219,unauthorized_transaction,unknown,True,issued,I did not receive my order.,No customer communication was received.,2026-06-25,2026-06-28,DO_NOT_CONTEST
+CB00107,5591,product_not_received,unknown,True,issued,I received the product but there is an issue.,Order was processed normally.,2026-04-29,2026-05-01,DO_NOT_CONTEST
+CB00108,11112,product_not_as_described,failed,False,issued,I was charged twice.,Refund request was received.,2026-04-27,2026-05-01,DO_NOT_CONTEST
+CB00109,7983,product_not_as_described,failed,True,not_issued,I did not receive my order.,Delivery was completed.,2026-05-11,2026-05-17,DO_NOT_CONTEST
+CB00110,13405,duplicate_charge,delivered,False,issued,The product I received is different from what I ordered.,No customer communication was received.,2026-03-10,2026-03-18,DO_NOT_CONTEST
+CB00111,14676,product_not_as_described,failed,False,issued,I don't recognize this transaction.,No customer communication was received.,2026-04-08,2026-04-15,DO_NOT_CONTEST
+CB00112,7960,duplicate_charge,delivered,False,not_issued,I received the product but there is an issue.,Refund request was received.,2026-08-14,2026-08-20,HUMAN_REVIEW
+CB00113,12701,unauthorized_transaction,unknown,False,issued,I received the product but there is an issue.,Refund request was received.,2026-08-16,2026-08-19,DO_NOT_CONTEST
+CB00114,8729,duplicate_charge,delivered,True,issued,The product I received is different from what I ordered.,Refund request was received.,2026-08-22,2026-08-25,DO_NOT_CONTEST
+CB00115,7217,product_not_as_described,delivered,False,issued,I don't recognize this transaction.,No customer communication was received.,2026-03-01,2026-03-08,DO_NOT_CONTEST
+CB00116,11146,product_not_received,failed,False,issued,I was charged twice.,No customer communication was received.,2026-08-16,2026-08-26,DO_NOT_CONTEST
+CB00117,1621,product_not_as_described,unknown,True,issued,I did not receive my order.,Refund request was received.,2026-07-31,2026-08-02,DO_NOT_CONTEST
+CB00118,7769,product_not_as_described,unknown,True,issued,I did not receive my order.,Delivery was completed.,2026-08-11,2026-08-16,DO_NOT_CONTEST
+CB00119,6373,duplicate_charge,failed,True,not_issued,The product I received is different from what I ordered.,Refund request was received.,2026-04-03,2026-04-06,DO_NOT_CONTEST
+CB00120,3285,product_not_as_described,delivered,True,issued,I was charged twice.,No customer communication was received.,2026-07-20,2026-07-24,DO_NOT_CONTEST
+CB00121,8055,duplicate_charge,failed,True,issued,I was charged twice.,Delivery was completed.,2026-03-05,2026-03-14,DO_NOT_CONTEST
+CB00122,3088,product_not_received,failed,False,issued,I was charged twice.,Delivery was completed.,2026-05-01,2026-05-06,DO_NOT_CONTEST
+CB00123,3763,unauthorized_transaction,failed,True,not_issued,I was charged twice.,No customer communication was received.,2026-05-26,2026-06-05,DO_NOT_CONTEST
+CB00124,5347,duplicate_charge,delivered,False,issued,I did not receive my order.,No customer communication was received.,2026-03-03,2026-03-04,DO_NOT_CONTEST
+CB00125,10435,unauthorized_transaction,failed,False,not_issued,I received the product but there is an issue.,Customer contacted support.,2026-03-20,2026-03-25,DO_NOT_CONTEST
+CB00126,11604,product_not_as_described,unknown,True,not_issued,I don't recognize this transaction.,Refund request was received.,2026-08-17,2026-08-27,HUMAN_REVIEW
+CB00127,6477,product_not_as_described,delivered,False,issued,I was charged twice.,Customer contacted support.,2026-07-05,2026-07-08,DO_NOT_CONTEST
+CB00128,13386,duplicate_charge,unknown,True,issued,I don't recognize this transaction.,Refund request was received.,2026-06-11,2026-06-17,DO_NOT_CONTEST
+CB00129,13676,product_not_received,failed,True,not_issued,I received the product but there is an issue.,Refund request was received.,2026-04-05,2026-04-11,DO_NOT_CONTEST
+CB00130,1979,unauthorized_transaction,delivered,True,issued,I was charged twice.,Delivery was completed.,2026-03-06,2026-03-11,DO_NOT_CONTEST
+CB00131,10077,unauthorized_transaction,unknown,True,issued,I received the product but there is an issue.,Refund request was received.,2026-08-19,2026-08-29,DO_NOT_CONTEST
+CB00132,14987,duplicate_charge,unknown,True,not_issued,I was charged twice.,Delivery was completed.,2026-03-12,2026-03-19,HUMAN_REVIEW
+CB00133,2411,product_not_as_described,delivered,False,not_issued,I was charged twice.,Order was processed normally.,2026-08-01,2026-08-05,HUMAN_REVIEW
+CB00134,9307,product_not_as_described,failed,False,issued,The product I received is different from what I ordered.,Refund request was received.,2026-03-28,2026-03-31,DO_NOT_CONTEST
+CB00135,7297,product_not_received,failed,False,issued,I did not receive my order.,Delivery was completed.,2026-07-01,2026-07-09,DO_NOT_CONTEST
+CB00136,7785,product_not_as_described,failed,False,not_issued,The product I received is different from what I ordered.,Delivery was completed.,2026-08-10,2026-08-17,DO_NOT_CONTEST
+CB00137,5020,product_not_as_described,delivered,True,issued,I received the product but there is an issue.,No customer communication was received.,2026-08-20,2026-08-21,DO_NOT_CONTEST
+CB00138,13390,duplicate_charge,delivered,True,not_issued,I did not receive my order.,No customer communication was received.,2026-07-03,2026-07-13,CONTEST
+CB00139,4038,product_not_as_described,failed,True,not_issued,I don't recognize this transaction.,Customer contacted support.,2026-07-23,2026-08-01,DO_NOT_CONTEST
+CB00140,4606,product_not_as_described,delivered,True,not_issued,I did not receive my order.,Delivery was completed.,2026-06-26,2026-07-06,CONTEST
+CB00141,5804,product_not_received,delivered,True,issued,I received the product but there is an issue.,Refund request was received.,2026-04-13,2026-04-15,DO_NOT_CONTEST
+CB00142,12716,product_not_received,failed,False,issued,The product I received is different from what I ordered.,No customer communication was received.,2026-07-29,2026-08-06,DO_NOT_CONTEST
+CB00143,8754,product_not_as_described,unknown,False,not_issued,I was charged twice.,Order was processed normally.,2026-08-10,2026-08-18,HUMAN_REVIEW
+CB00144,14382,unauthorized_transaction,failed,False,not_issued,I was charged twice.,Order was processed normally.,2026-08-05,2026-08-11,DO_NOT_CONTEST
+CB00145,10466,product_not_as_described,delivered,False,not_issued,The product I received is different from what I ordered.,No customer communication was received.,2026-04-07,2026-04-13,HUMAN_REVIEW
+CB00146,6740,duplicate_charge,failed,True,issued,I did not receive my order.,No customer communication was received.,2026-07-01,2026-07-08,DO_NOT_CONTEST
+CB00147,7898,product_not_as_described,failed,False,issued,I was charged twice.,Refund request was received.,2026-08-01,2026-08-07,DO_NOT_CONTEST
+CB00148,7492,duplicate_charge,unknown,False,issued,I received the product but there is an issue.,Refund request was received.,2026-08-08,2026-08-10,DO_NOT_CONTEST
+CB00149,14127,product_not_received,delivered,True,issued,I don't recognize this transaction.,Customer contacted support.,2026-04-05,2026-04-06,DO_NOT_CONTEST
+CB00150,10108,duplicate_charge,unknown,False,not_issued,I don't recognize this transaction.,Refund request was received.,2026-08-12,2026-08-17,HUMAN_REVIEW
+CB00151,10337,duplicate_charge,failed,True,not_issued,I received the product but there is an issue.,Refund request was received.,2026-06-29,2026-07-01,DO_NOT_CONTEST
+CB00152,6236,duplicate_charge,delivered,True,issued,I was charged twice.,No customer communication was received.,2026-03-19,2026-03-29,DO_NOT_CONTEST
+CB00153,11558,product_not_received,unknown,True,issued,I received the product but there is an issue.,Delivery was completed.,2026-02-27,2026-03-04,DO_NOT_CONTEST
+CB00154,6067,duplicate_charge,delivered,True,not_issued,The product I received is different from what I ordered.,Refund request was received.,2026-08-08,2026-08-11,CONTEST
+CB00155,12640,product_not_received,delivered,False,not_issued,I was charged twice.,Refund request was received.,2026-05-30,2026-06-02,HUMAN_REVIEW
+CB00156,6562,duplicate_charge,unknown,True,issued,I did not receive my order.,Customer contacted support.,2026-07-16,2026-07-26,DO_NOT_CONTEST
+CB00157,1315,product_not_received,failed,False,issued,I was charged twice.,No customer communication was received.,2026-05-04,2026-05-11,DO_NOT_CONTEST
+CB00158,4975,product_not_as_described,unknown,False,not_issued,I was charged twice.,Order was processed normally.,2026-06-14,2026-06-24,HUMAN_REVIEW
+CB00159,8472,duplicate_charge,delivered,False,not_issued,The product I received is different from what I ordered.,Order was processed normally.,2026-08-24,2026-08-28,HUMAN_REVIEW
+CB00160,5438,product_not_as_described,delivered,False,issued,I don't recognize this transaction.,Order was processed normally.,2026-08-24,2026-09-01,DO_NOT_CONTEST
+CB00161,12739,unauthorized_transaction,delivered,False,not_issued,The product I received is different from what I ordered.,Customer contacted support.,2026-04-19,2026-04-28,HUMAN_REVIEW
+CB00162,14153,duplicate_charge,delivered,True,issued,I was charged twice.,Order was processed normally.,2026-04-30,2026-05-02,DO_NOT_CONTEST
+CB00163,14624,duplicate_charge,unknown,False,issued,I was charged twice.,Delivery was completed.,2026-07-27,2026-08-03,DO_NOT_CONTEST
+CB00164,841,duplicate_charge,delivered,False,issued,I did not receive my order.,Refund request was received.,2026-07-29,2026-08-02,DO_NOT_CONTEST
+CB00165,7638,unauthorized_transaction,unknown,False,not_issued,I don't recognize this transaction.,Delivery was completed.,2026-06-30,2026-07-06,HUMAN_REVIEW
+CB00166,13265,product_not_as_described,delivered,True,not_issued,I don't recognize this transaction.,Delivery was completed.,2026-03-13,2026-03-16,CONTEST
+CB00167,4371,product_not_received,delivered,True,issued,I received the product but there is an issue.,No customer communication was received.,2026-07-17,2026-07-19,DO_NOT_CONTEST
+CB00168,3402,unauthorized_transaction,failed,False,issued,I don't recognize this transaction.,Customer contacted support.,2026-05-05,2026-05-07,DO_NOT_CONTEST
+CB00169,8182,unauthorized_transaction,unknown,False,issued,The product I received is different from what I ordered.,Order was processed normally.,2026-05-27,2026-06-05,DO_NOT_CONTEST
+CB00170,1715,duplicate_charge,failed,True,issued,I did not receive my order.,Delivery was completed.,2026-06-13,2026-06-15,DO_NOT_CONTEST
+CB00171,11062,product_not_received,unknown,False,issued,The product I received is different from what I ordered.,No customer communication was received.,2026-08-15,2026-08-23,DO_NOT_CONTEST
+CB00172,13768,product_not_as_described,failed,True,issued,I did not receive my order.,Refund request was received.,2026-07-30,2026-08-05,DO_NOT_CONTEST
+CB00173,12203,product_not_received,unknown,True,not_issued,I received the product but there is an issue.,Refund request was received.,2026-05-05,2026-05-14,HUMAN_REVIEW
+CB00174,9064,product_not_as_described,failed,False,issued,I was charged twice.,Refund request was received.,2026-05-31,2026-06-10,DO_NOT_CONTEST
+CB00175,1357,duplicate_charge,delivered,True,issued,The product I received is different from what I ordered.,Refund request was received.,2026-06-14,2026-06-19,DO_NOT_CONTEST
+CB00176,12357,product_not_as_described,failed,True,not_issued,I don't recognize this transaction.,Delivery was completed.,2026-03-11,2026-03-18,DO_NOT_CONTEST
+CB00177,2612,product_not_received,failed,False,issued,I received the product but there is an issue.,No customer communication was received.,2026-08-02,2026-08-09,DO_NOT_CONTEST
+CB00178,8831,duplicate_charge,delivered,False,issued,I received the product but there is an issue.,Customer contacted support.,2026-05-30,2026-06-07,DO_NOT_CONTEST
+CB00179,3645,product_not_as_described,delivered,True,not_issued,I don't recognize this transaction.,Order was processed normally.,2026-04-18,2026-04-27,CONTEST
+CB00180,14182,product_not_received,unknown,True,issued,The product I received is different from what I ordered.,Refund request was received.,2026-07-17,2026-07-20,DO_NOT_CONTEST
+CB00181,3462,product_not_as_described,unknown,True,issued,I was charged twice.,Delivery was completed.,2026-03-05,2026-03-09,DO_NOT_CONTEST
+CB00182,7777,duplicate_charge,unknown,True,issued,The product I received is different from what I ordered.,Customer contacted support.,2026-06-07,2026-06-15,DO_NOT_CONTEST
+CB00183,14182,product_not_as_described,failed,False,issued,I don't recognize this transaction.,Refund request was received.,2026-04-19,2026-04-28,DO_NOT_CONTEST
+CB00184,7359,product_not_as_described,delivered,False,not_issued,I did not receive my order.,Refund request was received.,2026-05-22,2026-05-31,HUMAN_REVIEW
+CB00185,2180,product_not_received,failed,True,not_issued,I don't recognize this transaction.,Refund request was received.,2026-04-16,2026-04-19,DO_NOT_CONTEST
+CB00186,14115,unauthorized_transaction,delivered,False,not_issued,I don't recognize this transaction.,Order was processed normally.,2026-05-11,2026-05-12,HUMAN_REVIEW
+CB00187,6995,duplicate_charge,delivered,True,issued,I don't recognize this transaction.,Customer contacted support.,2026-08-18,2026-08-24,DO_NOT_CONTEST
+CB00188,2123,duplicate_charge,delivered,True,not_issued,I don't recognize this transaction.,Refund request was received.,2026-02-28,2026-03-03,CONTEST
+CB00189,12932,unauthorized_transaction,failed,True,not_issued,I did not receive my order.,Delivery was completed.,2026-07-01,2026-07-04,DO_NOT_CONTEST
+CB00190,9491,unauthorized_transaction,delivered,True,issued,I don't recognize this transaction.,Order was processed normally.,2026-08-13,2026-08-17,DO_NOT_CONTEST
+CB00191,7378,unauthorized_transaction,delivered,False,not_issued,The product I received is different from what I ordered.,No customer communication was received.,2026-08-21,2026-08-30,HUMAN_REVIEW
+CB00192,9921,product_not_as_described,unknown,False,not_issued,I was charged twice.,Order was processed normally.,2026-03-21,2026-03-27,HUMAN_REVIEW
+CB00193,4441,unauthorized_transaction,delivered,False,not_issued,I did not receive my order.,No customer communication was received.,2026-04-08,2026-04-17,HUMAN_REVIEW
+CB00194,13384,product_not_received,failed,True,issued,I was charged twice.,Delivery was completed.,2026-06-22,2026-06-23,DO_NOT_CONTEST
+CB00195,6350,product_not_received,failed,True,not_issued,The product I received is different from what I ordered.,Delivery was completed.,2026-07-22,2026-07-23,DO_NOT_CONTEST
+CB00196,6272,duplicate_charge,unknown,False,not_issued,I was charged twice.,Customer contacted support.,2026-07-22,2026-07-24,HUMAN_REVIEW
+CB00197,12231,unauthorized_transaction,delivered,True,issued,I did not receive my order.,Customer contacted support.,2026-08-15,2026-08-21,DO_NOT_CONTEST
+CB00198,5580,unauthorized_transaction,unknown,False,issued,I did not receive my order.,Customer contacted support.,2026-06-13,2026-06-19,DO_NOT_CONTEST
+CB00199,14625,product_not_received,unknown,False,issued,I did not receive my order.,Delivery was completed.,2026-05-06,2026-05-13,DO_NOT_CONTEST
+CB00200,12678,unauthorized_transaction,failed,True,issued,I was charged twice.,Refund request was received.,2026-05-23,2026-06-01,DO_NOT_CONTEST

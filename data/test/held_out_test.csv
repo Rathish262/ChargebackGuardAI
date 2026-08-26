@@ -1,0 +1,151 @@
+dispute_id,amount,scenario,reason,delivery_status,delivery_proof,refund_status,customer_message,merchant_message,transaction_date,delivery_date,ground_truth
+CB00552,19105,delivery_failure,product_not_received,failed,False,not_issued,I did not receive my order.,Courier delivery attempt failed.,2026-07-12,2026-07-22,DO_NOT_CONTEST
+CB00975,6498,unauthorized_transaction,unauthorized_transaction,unknown,False,not_issued,I do not recognize this transaction.,The transaction requires further verification.,2026-03-11,2026-03-13,HUMAN_REVIEW
+CB00763,3053,refund_issued,product_not_received,delivered,True,issued,I did not receive my order.,Refund has already been issued to the customer.,2026-03-27,2026-03-31,DO_NOT_CONTEST
+CB00253,8192,contradictory_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Customer previously confirmed that the order was received.,2026-06-28,2026-06-30,HUMAN_REVIEW
+CB00993,6744,strong_delivery_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Delivery was completed and proof is available.,2026-03-05,2026-03-06,CONTEST
+CB00272,12044,delivery_failure,product_not_received,failed,False,not_issued,I did not receive my order.,Courier delivery attempt failed.,2026-03-16,2026-03-20,DO_NOT_CONTEST
+CB00147,18002,strong_delivery_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Delivery was completed and proof is available.,2026-05-17,2026-05-27,CONTEST
+CB00470,2315,missing_delivery_evidence,product_not_received,unknown,False,not_issued,I did not receive my order.,We could not find delivery confirmation.,2026-04-15,2026-04-18,HUMAN_REVIEW
+CB00659,3498,strong_delivery_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Delivery was completed and proof is available.,2026-06-08,2026-06-16,CONTEST
+CB00406,7775,weak_evidence,product_not_as_described,delivered,True,not_issued,The product I received was not as described.,No additional evidence is available.,2026-05-28,2026-05-29,HUMAN_REVIEW
+CB00512,19955,unauthorized_transaction,unauthorized_transaction,unknown,False,not_issued,I do not recognize this transaction.,The transaction requires further verification.,2026-04-18,2026-04-27,HUMAN_REVIEW
+CB00672,19957,delivery_failure,product_not_received,failed,False,not_issued,I did not receive my order.,Courier delivery attempt failed.,2026-04-30,2026-05-02,DO_NOT_CONTEST
+CB00218,19680,duplicate_charge,duplicate_charge,delivered,True,not_issued,I was charged twice for the same order.,Two payment records were detected.,2026-03-16,2026-03-24,HUMAN_REVIEW
+CB00323,2699,missing_delivery_evidence,product_not_received,unknown,False,not_issued,I did not receive my order.,We could not find delivery confirmation.,2026-08-04,2026-08-06,HUMAN_REVIEW
+CB00736,4346,delivery_failure,product_not_received,failed,False,not_issued,I did not receive my order.,Courier delivery attempt failed.,2026-07-03,2026-07-13,DO_NOT_CONTEST
+CB00581,12809,missing_delivery_evidence,product_not_received,unknown,False,not_issued,I did not receive my order.,We could not find delivery confirmation.,2026-03-04,2026-03-13,HUMAN_REVIEW
+CB00217,17505,weak_evidence,product_not_as_described,delivered,True,not_issued,The product I received was not as described.,No additional evidence is available.,2026-06-15,2026-06-18,HUMAN_REVIEW
+CB00068,19642,weak_evidence,product_not_as_described,delivered,True,not_issued,The product I received was not as described.,No additional evidence is available.,2026-04-19,2026-04-28,HUMAN_REVIEW
+CB00275,19491,unauthorized_transaction,unauthorized_transaction,unknown,False,not_issued,I do not recognize this transaction.,The transaction requires further verification.,2026-07-23,2026-07-25,HUMAN_REVIEW
+CB00411,1755,contradictory_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Customer previously confirmed that the order was received.,2026-04-27,2026-04-30,HUMAN_REVIEW
+CB00324,14651,missing_delivery_evidence,product_not_received,unknown,False,not_issued,I did not receive my order.,We could not find delivery confirmation.,2026-05-22,2026-05-25,HUMAN_REVIEW
+CB00825,15522,missing_delivery_evidence,product_not_received,unknown,False,not_issued,I did not receive my order.,We could not find delivery confirmation.,2026-03-30,2026-04-01,HUMAN_REVIEW
+CB00983,5440,refund_issued,product_not_received,delivered,True,issued,I did not receive my order.,Refund has already been issued to the customer.,2026-07-05,2026-07-11,DO_NOT_CONTEST
+CB00842,2520,delivery_failure,product_not_received,failed,False,not_issued,I did not receive my order.,Courier delivery attempt failed.,2026-07-23,2026-07-27,DO_NOT_CONTEST
+CB00235,15467,refund_issued,product_not_received,delivered,True,issued,I did not receive my order.,Refund has already been issued to the customer.,2026-05-19,2026-05-23,DO_NOT_CONTEST
+CB00058,6512,contradictory_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Customer previously confirmed that the order was received.,2026-04-29,2026-05-03,HUMAN_REVIEW
+CB00795,4413,strong_delivery_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Delivery was completed and proof is available.,2026-07-21,2026-07-22,CONTEST
+CB00787,14112,duplicate_charge,duplicate_charge,delivered,True,not_issued,I was charged twice for the same order.,Two payment records were detected.,2026-02-27,2026-03-06,HUMAN_REVIEW
+CB00864,13227,unauthorized_transaction,unauthorized_transaction,unknown,False,not_issued,I do not recognize this transaction.,The transaction requires further verification.,2026-07-12,2026-07-15,HUMAN_REVIEW
+CB00333,7910,duplicate_charge,duplicate_charge,delivered,True,not_issued,I was charged twice for the same order.,Two payment records were detected.,2026-04-04,2026-04-14,HUMAN_REVIEW
+CB00702,4271,strong_delivery_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Delivery was completed and proof is available.,2026-05-30,2026-06-01,CONTEST
+CB00225,537,weak_evidence,product_not_as_described,delivered,True,not_issued,The product I received was not as described.,No additional evidence is available.,2026-05-12,2026-05-13,HUMAN_REVIEW
+CB00571,19608,weak_evidence,product_not_as_described,delivered,True,not_issued,The product I received was not as described.,No additional evidence is available.,2026-08-02,2026-08-11,HUMAN_REVIEW
+CB00705,14471,weak_evidence,product_not_as_described,delivered,True,not_issued,The product I received was not as described.,No additional evidence is available.,2026-06-27,2026-07-04,HUMAN_REVIEW
+CB00656,10178,delivery_failure,product_not_received,failed,False,not_issued,I did not receive my order.,Courier delivery attempt failed.,2026-08-07,2026-08-09,DO_NOT_CONTEST
+CB00277,7079,refund_issued,product_not_received,delivered,True,issued,I did not receive my order.,Refund has already been issued to the customer.,2026-04-09,2026-04-15,DO_NOT_CONTEST
+CB00389,1097,unauthorized_transaction,unauthorized_transaction,unknown,False,not_issued,I do not recognize this transaction.,The transaction requires further verification.,2026-06-07,2026-06-10,HUMAN_REVIEW
+CB00474,9493,refund_issued,product_not_received,delivered,True,issued,I did not receive my order.,Refund has already been issued to the customer.,2026-03-18,2026-03-23,DO_NOT_CONTEST
+CB00168,9350,weak_evidence,product_not_as_described,delivered,True,not_issued,The product I received was not as described.,No additional evidence is available.,2026-04-28,2026-05-05,HUMAN_REVIEW
+CB00995,10726,refund_issued,product_not_received,delivered,True,issued,I did not receive my order.,Refund has already been issued to the customer.,2026-07-30,2026-08-06,DO_NOT_CONTEST
+CB00747,3550,duplicate_charge,duplicate_charge,delivered,True,not_issued,I was charged twice for the same order.,Two payment records were detected.,2026-04-16,2026-04-21,HUMAN_REVIEW
+CB00547,10277,missing_delivery_evidence,product_not_received,unknown,False,not_issued,I did not receive my order.,We could not find delivery confirmation.,2026-06-01,2026-06-06,HUMAN_REVIEW
+CB00176,13817,weak_evidence,product_not_as_described,delivered,True,not_issued,The product I received was not as described.,No additional evidence is available.,2026-04-05,2026-04-09,HUMAN_REVIEW
+CB00908,13524,weak_evidence,product_not_as_described,delivered,True,not_issued,The product I received was not as described.,No additional evidence is available.,2026-04-22,2026-04-27,HUMAN_REVIEW
+CB00624,15600,refund_issued,product_not_received,delivered,True,issued,I did not receive my order.,Refund has already been issued to the customer.,2026-05-27,2026-05-30,DO_NOT_CONTEST
+CB00074,10795,delivery_failure,product_not_received,failed,False,not_issued,I did not receive my order.,Courier delivery attempt failed.,2026-06-19,2026-06-26,DO_NOT_CONTEST
+CB00664,11130,duplicate_charge,duplicate_charge,delivered,True,not_issued,I was charged twice for the same order.,Two payment records were detected.,2026-08-22,2026-08-27,HUMAN_REVIEW
+CB00700,3698,weak_evidence,product_not_as_described,delivered,True,not_issued,The product I received was not as described.,No additional evidence is available.,2026-02-28,2026-03-08,HUMAN_REVIEW
+CB00971,6723,unauthorized_transaction,unauthorized_transaction,unknown,False,not_issued,I do not recognize this transaction.,The transaction requires further verification.,2026-06-30,2026-07-09,HUMAN_REVIEW
+CB00274,1791,contradictory_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Customer previously confirmed that the order was received.,2026-05-05,2026-05-06,HUMAN_REVIEW
+CB00687,16203,duplicate_charge,duplicate_charge,delivered,True,not_issued,I was charged twice for the same order.,Two payment records were detected.,2026-04-11,2026-04-20,HUMAN_REVIEW
+CB00215,19348,strong_delivery_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Delivery was completed and proof is available.,2026-03-06,2026-03-11,CONTEST
+CB00364,8242,missing_delivery_evidence,product_not_received,unknown,False,not_issued,I did not receive my order.,We could not find delivery confirmation.,2026-07-19,2026-07-24,HUMAN_REVIEW
+CB00380,14898,refund_issued,product_not_received,delivered,True,issued,I did not receive my order.,Refund has already been issued to the customer.,2026-05-24,2026-05-30,DO_NOT_CONTEST
+CB00167,5513,duplicate_charge,duplicate_charge,delivered,True,not_issued,I was charged twice for the same order.,Two payment records were detected.,2026-07-11,2026-07-20,HUMAN_REVIEW
+CB00374,17115,duplicate_charge,duplicate_charge,delivered,True,not_issued,I was charged twice for the same order.,Two payment records were detected.,2026-04-29,2026-05-09,HUMAN_REVIEW
+CB00855,4996,duplicate_charge,duplicate_charge,delivered,True,not_issued,I was charged twice for the same order.,Two payment records were detected.,2026-07-05,2026-07-14,HUMAN_REVIEW
+CB00651,14822,delivery_failure,product_not_received,failed,False,not_issued,I did not receive my order.,Courier delivery attempt failed.,2026-08-06,2026-08-12,DO_NOT_CONTEST
+CB00465,13546,weak_evidence,product_not_as_described,delivered,True,not_issued,The product I received was not as described.,No additional evidence is available.,2026-04-13,2026-04-20,HUMAN_REVIEW
+CB00955,7274,contradictory_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Customer previously confirmed that the order was received.,2026-03-12,2026-03-19,HUMAN_REVIEW
+CB00948,13507,missing_delivery_evidence,product_not_received,unknown,False,not_issued,I did not receive my order.,We could not find delivery confirmation.,2026-03-04,2026-03-05,HUMAN_REVIEW
+CB00104,13596,unauthorized_transaction,unauthorized_transaction,unknown,False,not_issued,I do not recognize this transaction.,The transaction requires further verification.,2026-08-18,2026-08-20,HUMAN_REVIEW
+CB00888,8676,missing_delivery_evidence,product_not_received,unknown,False,not_issued,I did not receive my order.,We could not find delivery confirmation.,2026-05-28,2026-06-02,HUMAN_REVIEW
+CB00979,15918,strong_delivery_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Delivery was completed and proof is available.,2026-03-16,2026-03-26,CONTEST
+CB00876,19702,missing_delivery_evidence,product_not_received,unknown,False,not_issued,I did not receive my order.,We could not find delivery confirmation.,2026-05-31,2026-06-05,HUMAN_REVIEW
+CB00082,10310,missing_delivery_evidence,product_not_received,unknown,False,not_issued,I did not receive my order.,We could not find delivery confirmation.,2026-07-22,2026-07-27,HUMAN_REVIEW
+CB00297,9540,delivery_failure,product_not_received,failed,False,not_issued,I did not receive my order.,Courier delivery attempt failed.,2026-07-25,2026-08-02,DO_NOT_CONTEST
+CB00792,8319,strong_delivery_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Delivery was completed and proof is available.,2026-06-24,2026-06-26,CONTEST
+CB00234,14114,weak_evidence,product_not_as_described,delivered,True,not_issued,The product I received was not as described.,No additional evidence is available.,2026-04-27,2026-05-01,HUMAN_REVIEW
+CB00678,13549,unauthorized_transaction,unauthorized_transaction,unknown,False,not_issued,I do not recognize this transaction.,The transaction requires further verification.,2026-06-12,2026-06-20,HUMAN_REVIEW
+CB00047,19777,delivery_failure,product_not_received,failed,False,not_issued,I did not receive my order.,Courier delivery attempt failed.,2026-03-28,2026-04-01,DO_NOT_CONTEST
+CB00072,8567,strong_delivery_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Delivery was completed and proof is available.,2026-03-20,2026-03-22,CONTEST
+CB00722,16544,contradictory_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Customer previously confirmed that the order was received.,2026-07-21,2026-07-24,HUMAN_REVIEW
+CB00197,4381,duplicate_charge,duplicate_charge,delivered,True,not_issued,I was charged twice for the same order.,Two payment records were detected.,2026-03-23,2026-04-02,HUMAN_REVIEW
+CB00592,14883,delivery_failure,product_not_received,failed,False,not_issued,I did not receive my order.,Courier delivery attempt failed.,2026-04-09,2026-04-13,DO_NOT_CONTEST
+CB00371,2931,contradictory_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Customer previously confirmed that the order was received.,2026-04-29,2026-05-07,HUMAN_REVIEW
+CB00883,10927,delivery_failure,product_not_received,failed,False,not_issued,I did not receive my order.,Courier delivery attempt failed.,2026-03-15,2026-03-25,DO_NOT_CONTEST
+CB00907,3184,weak_evidence,product_not_as_described,delivered,True,not_issued,The product I received was not as described.,No additional evidence is available.,2026-07-27,2026-08-01,HUMAN_REVIEW
+CB00634,3656,refund_issued,product_not_received,delivered,True,issued,I did not receive my order.,Refund has already been issued to the customer.,2026-06-25,2026-06-29,DO_NOT_CONTEST
+CB00644,16081,contradictory_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Customer previously confirmed that the order was received.,2026-08-14,2026-08-16,HUMAN_REVIEW
+CB00850,6162,unauthorized_transaction,unauthorized_transaction,unknown,False,not_issued,I do not recognize this transaction.,The transaction requires further verification.,2026-07-02,2026-07-05,HUMAN_REVIEW
+CB00301,7288,delivery_failure,product_not_received,failed,False,not_issued,I did not receive my order.,Courier delivery attempt failed.,2026-06-27,2026-07-03,DO_NOT_CONTEST
+CB00566,3182,weak_evidence,product_not_as_described,delivered,True,not_issued,The product I received was not as described.,No additional evidence is available.,2026-04-12,2026-04-18,HUMAN_REVIEW
+CB00081,17832,strong_delivery_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Delivery was completed and proof is available.,2026-03-08,2026-03-17,CONTEST
+CB00388,3562,duplicate_charge,duplicate_charge,delivered,True,not_issued,I was charged twice for the same order.,Two payment records were detected.,2026-04-17,2026-04-23,HUMAN_REVIEW
+CB00128,17472,weak_evidence,product_not_as_described,delivered,True,not_issued,The product I received was not as described.,No additional evidence is available.,2026-08-13,2026-08-22,HUMAN_REVIEW
+CB00550,11335,refund_issued,product_not_received,delivered,True,issued,I did not receive my order.,Refund has already been issued to the customer.,2026-04-30,2026-05-05,DO_NOT_CONTEST
+CB00471,10465,refund_issued,product_not_received,delivered,True,issued,I did not receive my order.,Refund has already been issued to the customer.,2026-07-15,2026-07-21,DO_NOT_CONTEST
+CB00748,12593,weak_evidence,product_not_as_described,delivered,True,not_issued,The product I received was not as described.,No additional evidence is available.,2026-04-23,2026-04-29,HUMAN_REVIEW
+CB00045,14855,weak_evidence,product_not_as_described,delivered,True,not_issued,The product I received was not as described.,No additional evidence is available.,2026-07-26,2026-07-30,HUMAN_REVIEW
+CB00827,2952,strong_delivery_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Delivery was completed and proof is available.,2026-05-06,2026-05-09,CONTEST
+CB00271,16776,contradictory_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Customer previously confirmed that the order was received.,2026-06-28,2026-07-08,HUMAN_REVIEW
+CB00619,7750,refund_issued,product_not_received,delivered,True,issued,I did not receive my order.,Refund has already been issued to the customer.,2026-08-21,2026-08-26,DO_NOT_CONTEST
+CB00353,12105,missing_delivery_evidence,product_not_received,unknown,False,not_issued,I did not receive my order.,We could not find delivery confirmation.,2026-05-16,2026-05-17,HUMAN_REVIEW
+CB00868,16629,contradictory_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Customer previously confirmed that the order was received.,2026-07-12,2026-07-20,HUMAN_REVIEW
+CB00368,11090,unauthorized_transaction,unauthorized_transaction,unknown,False,not_issued,I do not recognize this transaction.,The transaction requires further verification.,2026-07-18,2026-07-26,HUMAN_REVIEW
+CB00100,7788,delivery_failure,product_not_received,failed,False,not_issued,I did not receive my order.,Courier delivery attempt failed.,2026-04-30,2026-05-06,DO_NOT_CONTEST
+CB00390,7518,unauthorized_transaction,unauthorized_transaction,unknown,False,not_issued,I do not recognize this transaction.,The transaction requires further verification.,2026-04-23,2026-04-27,HUMAN_REVIEW
+CB00095,3868,unauthorized_transaction,unauthorized_transaction,unknown,False,not_issued,I do not recognize this transaction.,The transaction requires further verification.,2026-04-04,2026-04-11,HUMAN_REVIEW
+CB00991,652,strong_delivery_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Delivery was completed and proof is available.,2026-04-11,2026-04-15,CONTEST
+CB00345,7563,missing_delivery_evidence,product_not_received,unknown,False,not_issued,I did not receive my order.,We could not find delivery confirmation.,2026-05-29,2026-06-05,HUMAN_REVIEW
+CB00782,4824,duplicate_charge,duplicate_charge,delivered,True,not_issued,I was charged twice for the same order.,Two payment records were detected.,2026-04-02,2026-04-09,HUMAN_REVIEW
+CB00221,5769,unauthorized_transaction,unauthorized_transaction,unknown,False,not_issued,I do not recognize this transaction.,The transaction requires further verification.,2026-05-12,2026-05-20,HUMAN_REVIEW
+CB00160,19462,strong_delivery_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Delivery was completed and proof is available.,2026-06-07,2026-06-17,CONTEST
+CB00965,11154,contradictory_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Customer previously confirmed that the order was received.,2026-06-20,2026-06-25,HUMAN_REVIEW
+CB00349,10376,delivery_failure,product_not_received,failed,False,not_issued,I did not receive my order.,Courier delivery attempt failed.,2026-07-21,2026-07-26,DO_NOT_CONTEST
+CB00984,13908,weak_evidence,product_not_as_described,delivered,True,not_issued,The product I received was not as described.,No additional evidence is available.,2026-07-20,2026-07-26,HUMAN_REVIEW
+CB00715,15503,refund_issued,product_not_received,delivered,True,issued,I did not receive my order.,Refund has already been issued to the customer.,2026-03-06,2026-03-11,DO_NOT_CONTEST
+CB00164,14537,unauthorized_transaction,unauthorized_transaction,unknown,False,not_issued,I do not recognize this transaction.,The transaction requires further verification.,2026-08-08,2026-08-17,HUMAN_REVIEW
+CB00826,17061,refund_issued,product_not_received,delivered,True,issued,I did not receive my order.,Refund has already been issued to the customer.,2026-03-15,2026-03-22,DO_NOT_CONTEST
+CB00778,17196,delivery_failure,product_not_received,failed,False,not_issued,I did not receive my order.,Courier delivery attempt failed.,2026-05-17,2026-05-22,DO_NOT_CONTEST
+CB00007,9615,strong_delivery_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Delivery was completed and proof is available.,2026-07-16,2026-07-23,CONTEST
+CB00891,16657,duplicate_charge,duplicate_charge,delivered,True,not_issued,I was charged twice for the same order.,Two payment records were detected.,2026-05-28,2026-06-06,HUMAN_REVIEW
+CB00829,13376,unauthorized_transaction,unauthorized_transaction,unknown,False,not_issued,I do not recognize this transaction.,The transaction requires further verification.,2026-06-05,2026-06-13,HUMAN_REVIEW
+CB00285,4050,delivery_failure,product_not_received,failed,False,not_issued,I did not receive my order.,Courier delivery attempt failed.,2026-04-27,2026-04-28,DO_NOT_CONTEST
+CB00604,18928,duplicate_charge,duplicate_charge,delivered,True,not_issued,I was charged twice for the same order.,Two payment records were detected.,2026-05-11,2026-05-20,HUMAN_REVIEW
+CB00460,10014,contradictory_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Customer previously confirmed that the order was received.,2026-07-16,2026-07-19,HUMAN_REVIEW
+CB00226,6646,unauthorized_transaction,unauthorized_transaction,unknown,False,not_issued,I do not recognize this transaction.,The transaction requires further verification.,2026-03-19,2026-03-27,HUMAN_REVIEW
+CB00430,15497,strong_delivery_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Delivery was completed and proof is available.,2026-06-11,2026-06-15,CONTEST
+CB00987,654,weak_evidence,product_not_as_described,delivered,True,not_issued,The product I received was not as described.,No additional evidence is available.,2026-06-16,2026-06-20,HUMAN_REVIEW
+CB00719,17238,duplicate_charge,duplicate_charge,delivered,True,not_issued,I was charged twice for the same order.,Two payment records were detected.,2026-05-10,2026-05-20,HUMAN_REVIEW
+CB00666,8454,refund_issued,product_not_received,delivered,True,issued,I did not receive my order.,Refund has already been issued to the customer.,2026-03-03,2026-03-10,DO_NOT_CONTEST
+CB00734,8611,contradictory_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Customer previously confirmed that the order was received.,2026-08-17,2026-08-25,HUMAN_REVIEW
+CB00204,15898,contradictory_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Customer previously confirmed that the order was received.,2026-08-17,2026-08-21,HUMAN_REVIEW
+CB00575,1213,duplicate_charge,duplicate_charge,delivered,True,not_issued,I was charged twice for the same order.,Two payment records were detected.,2026-06-21,2026-06-22,HUMAN_REVIEW
+CB00028,5032,weak_evidence,product_not_as_described,delivered,True,not_issued,The product I received was not as described.,No additional evidence is available.,2026-08-02,2026-08-03,HUMAN_REVIEW
+CB00617,15884,unauthorized_transaction,unauthorized_transaction,unknown,False,not_issued,I do not recognize this transaction.,The transaction requires further verification.,2026-07-04,2026-07-10,HUMAN_REVIEW
+CB00518,16243,refund_issued,product_not_received,delivered,True,issued,I did not receive my order.,Refund has already been issued to the customer.,2026-04-13,2026-04-23,DO_NOT_CONTEST
+CB00239,19502,weak_evidence,product_not_as_described,delivered,True,not_issued,The product I received was not as described.,No additional evidence is available.,2026-07-18,2026-07-26,HUMAN_REVIEW
+CB00224,11093,missing_delivery_evidence,product_not_received,unknown,False,not_issued,I did not receive my order.,We could not find delivery confirmation.,2026-05-14,2026-05-23,HUMAN_REVIEW
+CB00096,5564,delivery_failure,product_not_received,failed,False,not_issued,I did not receive my order.,Courier delivery attempt failed.,2026-07-15,2026-07-18,DO_NOT_CONTEST
+CB00031,15837,contradictory_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Customer previously confirmed that the order was received.,2026-04-06,2026-04-07,HUMAN_REVIEW
+CB00033,4155,contradictory_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Customer previously confirmed that the order was received.,2026-05-06,2026-05-09,HUMAN_REVIEW
+CB00433,8800,strong_delivery_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Delivery was completed and proof is available.,2026-03-13,2026-03-17,CONTEST
+CB00605,17866,refund_issued,product_not_received,delivered,True,issued,I did not receive my order.,Refund has already been issued to the customer.,2026-05-18,2026-05-22,DO_NOT_CONTEST
+CB00090,18879,strong_delivery_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Delivery was completed and proof is available.,2026-07-28,2026-07-30,CONTEST
+CB00559,8243,strong_delivery_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Delivery was completed and proof is available.,2026-03-08,2026-03-10,CONTEST
+CB00914,3308,unauthorized_transaction,unauthorized_transaction,unknown,False,not_issued,I do not recognize this transaction.,The transaction requires further verification.,2026-04-09,2026-04-16,HUMAN_REVIEW
+CB00759,8704,missing_delivery_evidence,product_not_received,unknown,False,not_issued,I did not receive my order.,We could not find delivery confirmation.,2026-05-22,2026-05-25,HUMAN_REVIEW
+CB00693,7774,delivery_failure,product_not_received,failed,False,not_issued,I did not receive my order.,Courier delivery attempt failed.,2026-05-03,2026-05-09,DO_NOT_CONTEST
+CB00105,9059,refund_issued,product_not_received,delivered,True,issued,I did not receive my order.,Refund has already been issued to the customer.,2026-03-30,2026-04-04,DO_NOT_CONTEST
+CB00755,15559,strong_delivery_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Delivery was completed and proof is available.,2026-07-25,2026-07-28,CONTEST
+CB00143,18136,delivery_failure,product_not_received,failed,False,not_issued,I did not receive my order.,Courier delivery attempt failed.,2026-04-23,2026-04-27,DO_NOT_CONTEST
+CB00229,16383,missing_delivery_evidence,product_not_received,unknown,False,not_issued,I did not receive my order.,We could not find delivery confirmation.,2026-08-18,2026-08-28,HUMAN_REVIEW
+CB00251,12952,unauthorized_transaction,unauthorized_transaction,unknown,False,not_issued,I do not recognize this transaction.,The transaction requires further verification.,2026-03-18,2026-03-26,HUMAN_REVIEW
+CB00282,956,contradictory_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Customer previously confirmed that the order was received.,2026-04-10,2026-04-12,HUMAN_REVIEW
+CB00760,2196,duplicate_charge,duplicate_charge,delivered,True,not_issued,I was charged twice for the same order.,Two payment records were detected.,2026-03-18,2026-03-23,HUMAN_REVIEW
+CB00026,18894,contradictory_evidence,product_not_received,delivered,True,not_issued,I did not receive my order.,Customer previously confirmed that the order was received.,2026-03-29,2026-04-05,HUMAN_REVIEW
+CB00115,12923,refund_issued,product_not_received,delivered,True,issued,I did not receive my order.,Refund has already been issued to the customer.,2026-03-21,2026-03-31,DO_NOT_CONTEST
+CB00655,19697,duplicate_charge,duplicate_charge,delivered,True,not_issued,I was charged twice for the same order.,Two payment records were detected.,2026-08-04,2026-08-14,HUMAN_REVIEW

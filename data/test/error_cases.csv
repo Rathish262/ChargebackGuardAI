@@ -1,0 +1,6 @@
+dispute_id,amount,scenario,reason,delivery_status,delivery_proof,refund_status,ground_truth,ml_prediction,final_decision,evidence_score,evidence_level,decision_reason
+CB00702,4271,strong_delivery_evidence,product_not_received,delivered,True,not_issued,CONTEST,HUMAN_REVIEW,HUMAN_REVIEW,93,STRONG,Risk model recommends human verification
+CB00792,8319,strong_delivery_evidence,product_not_received,delivered,True,not_issued,CONTEST,HUMAN_REVIEW,HUMAN_REVIEW,93,STRONG,Risk model recommends human verification
+CB00072,8567,strong_delivery_evidence,product_not_received,delivered,True,not_issued,CONTEST,HUMAN_REVIEW,HUMAN_REVIEW,93,STRONG,Risk model recommends human verification
+CB00081,17832,strong_delivery_evidence,product_not_received,delivered,True,not_issued,CONTEST,HUMAN_REVIEW,HUMAN_REVIEW,93,STRONG,Risk model recommends human verification
+CB00007,9615,strong_delivery_evidence,product_not_received,delivered,True,not_issued,CONTEST,HUMAN_REVIEW,HUMAN_REVIEW,93,STRONG,Risk model recommends human verification
