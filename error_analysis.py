@@ -104,6 +104,10 @@ def analyze_case(case):
 
     ml_prediction = model.predict(X)[0]
 
+    probabilities = model.predict_proba(X)[0]
+
+    ml_confidence = max(probabilities)
+
     evidence = evidence_engine.analyze(case)
 
     final_result = decision_engine.decide(
@@ -113,16 +117,23 @@ def analyze_case(case):
 
     return (
         ml_prediction,
+        ml_confidence,
+        evidence,
         final_result
     )
 
 
 # ==========================================
-# FIND ERRORS
+# ERROR COLLECTION
 # ==========================================
 
-errors = []
+ml_errors = []
+final_errors = []
 
+
+# ==========================================
+# ANALYZE ALL TEST CASES
+# ==========================================
 
 for _, row in test_df.iterrows():
 
@@ -130,39 +141,124 @@ for _, row in test_df.iterrows():
 
     actual = case["ground_truth"]
 
-    ml_prediction, result = analyze_case(case)
+    (
+        ml_prediction,
+        ml_confidence,
+        evidence,
+        result
+    ) = analyze_case(case)
 
     final_prediction = result["decision"]
 
-    if actual != final_prediction:
 
-        errors.append({
+    # --------------------------------------
+    # ML ERROR
+    # --------------------------------------
 
-            "dispute_id": case["dispute_id"],
+    if actual != ml_prediction:
 
-            "amount": case["amount"],
+        ml_errors.append({
 
-            "scenario": case["scenario"],
+            "dispute_id":
+                case["dispute_id"],
 
-            "reason": case["reason"],
+            "scenario":
+                case["scenario"],
 
-            "delivery_status": case["delivery_status"],
+            "amount":
+                case["amount"],
 
-            "delivery_proof": case["delivery_proof"],
+            "reason":
+                case["reason"],
 
-            "refund_status": case["refund_status"],
+            "delivery_status":
+                case["delivery_status"],
 
-            "ground_truth": actual,
+            "delivery_proof":
+                case["delivery_proof"],
 
-            "ml_prediction": ml_prediction,
+            "refund_status":
+                case["refund_status"],
 
-            "final_decision": final_prediction,
+            "ground_truth":
+                actual,
+
+            "ml_prediction":
+                ml_prediction,
+
+            "ml_confidence":
+                round(
+                    ml_confidence * 100,
+                    2
+                ),
+
+            "final_decision":
+                final_prediction,
 
             "evidence_score":
-                result["evidence_score"],
+                evidence["evidence_score"],
 
             "evidence_level":
-                result["evidence_level"],
+                evidence["evidence_level"],
+
+            "contradiction_detected":
+                evidence[
+                    "contradiction_detected"
+                ],
+
+            "decision_reason":
+                result["reason"]
+        })
+
+
+    # --------------------------------------
+    # FINAL SYSTEM ERROR
+    # --------------------------------------
+
+    if actual != final_prediction:
+
+        final_errors.append({
+
+            "dispute_id":
+                case["dispute_id"],
+
+            "scenario":
+                case["scenario"],
+
+            "amount":
+                case["amount"],
+
+            "reason":
+                case["reason"],
+
+            "delivery_status":
+                case["delivery_status"],
+
+            "delivery_proof":
+                case["delivery_proof"],
+
+            "refund_status":
+                case["refund_status"],
+
+            "ground_truth":
+                actual,
+
+            "ml_prediction":
+                ml_prediction,
+
+            "final_decision":
+                final_prediction,
+
+            "evidence_score":
+                evidence["evidence_score"],
+
+            "evidence_level":
+                evidence["evidence_level"],
+
+            "contradiction_detected":
+                evidence[
+                    "contradiction_detected"
+                ],
 
             "decision_reason":
                 result["reason"]
@@ -170,38 +266,57 @@ for _, row in test_df.iterrows():
 
 
 # ==========================================
-# DISPLAY RESULTS
+# ML ERROR SUMMARY
 # ==========================================
 
-print("===== ERROR SUMMARY =====")
+print("===== ML ERROR SUMMARY =====")
 
 print()
 
 print(
-    "Total errors:",
-    len(errors)
+    "Total ML errors:",
+    len(ml_errors)
+)
+
+print(
+    "ML correct predictions:",
+    len(test_df) - len(ml_errors)
+)
+
+ml_accuracy = (
+    (len(test_df) - len(ml_errors))
+    / len(test_df)
+) * 100
+
+print(
+    f"ML accuracy from error analysis: "
+    f"{ml_accuracy:.2f}%"
 )
 
 print()
 
 
 # ==========================================
-# ERROR BREAKDOWN
+# ML ERROR BREAKDOWN
 # ==========================================
 
-if errors:
+if ml_errors:
 
-    error_df = pd.DataFrame(errors)
+    ml_error_df = pd.DataFrame(
+        ml_errors
+    )
 
-    print("===== ERROR BREAKDOWN =====")
+    print(
+        "===== ML ERROR BREAKDOWN ====="
+    )
 
     print()
 
     print(
-        error_df[
+        ml_error_df[
             [
                 "ground_truth",
-                "final_decision"
+                "ml_prediction"
             ]
         ].value_counts()
     )
@@ -210,16 +325,24 @@ if errors:
 
 
     # ======================================
-    # SHOW FIRST 20 ERRORS
+    # FIRST 20 ML ERRORS
     # ======================================
 
-    print("===== FIRST 20 ERRORS =====")
+    print(
+        "===== FIRST 20 ML ERRORS ====="
+    )
 
     print()
 
-    for _, error in error_df.head(20).iterrows():
+    for _, error in (
+        ml_error_df
+        .head(20)
+        .iterrows()
+    ):
 
-        print("----------------------------------------")
+        print(
+            "----------------------------------------"
+        )
 
         print(
             "Dispute ID:",
@@ -232,11 +355,6 @@ if errors:
         )
 
         print(
-            "Reason:",
-            error["reason"]
-        )
-
-        print(
             "Ground Truth:",
             error["ground_truth"]
         )
@@ -244,6 +362,11 @@ if errors:
         print(
             "ML Prediction:",
             error["ml_prediction"]
+        )
+
+        print(
+            "ML Confidence:",
+            f'{error["ml_confidence"]}%'
         )
 
         print(
@@ -262,34 +385,121 @@ if errors:
         )
 
         print(
+            "Contradiction:",
+            error["contradiction_detected"]
+        )
+
+        print(
             "Decision Reason:",
             error["decision_reason"]
         )
 
-        print("----------------------------------------")
+        print(
+            "----------------------------------------"
+        )
 
-
-    # ======================================
-    # SAVE ERRORS
-    # ======================================
-
-    error_df.to_csv(
-        "data/test/error_cases.csv",
+    ml_error_df.to_csv(
+        "data/test/ml_error_cases.csv",
         index=False
     )
 
     print()
 
     print(
-        "Error cases saved to:",
-        "data/test/error_cases.csv"
+        "ML error cases saved to:",
+        "data/test/ml_error_cases.csv"
     )
 
 else:
 
-    print("No errors found.")
+    print(
+        "No ML errors found."
+    )
 
 
 print()
 
-print("===== ERROR ANALYSIS COMPLETED =====")
+
+# ==========================================
+# FINAL SYSTEM ERROR SUMMARY
+# ==========================================
+
+print(
+    "===== FINAL SYSTEM ERROR SUMMARY ====="
+)
+
+print()
+
+print(
+    "Total final decision errors:",
+    len(final_errors)
+)
+
+print(
+    "Final correct decisions:",
+    len(test_df) - len(final_errors)
+)
+
+final_accuracy = (
+    (len(test_df) - len(final_errors))
+    / len(test_df)
+) * 100
+
+print(
+    f"Final system accuracy: "
+    f"{final_accuracy:.2f}%"
+)
+
+print()
+
+
+# ==========================================
+# FINAL ERROR BREAKDOWN
+# ==========================================
+
+if final_errors:
+
+    final_error_df = pd.DataFrame(
+        final_errors
+    )
+
+    print(
+        "===== FINAL ERROR BREAKDOWN ====="
+    )
+
+    print()
+
+    print(
+        final_error_df[
+            [
+                "ground_truth",
+                "final_decision"
+            ]
+        ].value_counts()
+    )
+
+    print()
+
+
+    final_error_df.to_csv(
+        "data/test/final_error_cases.csv",
+        index=False
+    )
+
+    print(
+        "Final error cases saved to:",
+        "data/test/final_error_cases.csv"
+    )
+
+else:
+
+    print(
+        "No final decision errors found."
+    )
+
+
+print()
+
+print(
+    "===== ERROR ANALYSIS COMPLETED ====="
+)

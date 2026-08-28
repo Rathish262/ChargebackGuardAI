@@ -1,0 +1,19 @@
+dispute_id,scenario,amount,reason,delivery_status,delivery_proof,refund_status,ground_truth,ml_prediction,ml_confidence,final_decision,evidence_score,evidence_level,contradiction_detected,decision_reason
+CB00253,contradictory_evidence,8192,product_not_received,delivered,True,not_issued,HUMAN_REVIEW,CONTEST,93.0,HUMAN_REVIEW,80,STRONG,True,Conflicting evidence detected
+CB00058,contradictory_evidence,6512,product_not_received,delivered,True,not_issued,HUMAN_REVIEW,CONTEST,100.0,HUMAN_REVIEW,80,STRONG,True,Conflicting evidence detected
+CB00702,strong_delivery_evidence,4271,product_not_received,delivered,True,not_issued,CONTEST,HUMAN_REVIEW,79.5,CONTEST,93,STRONG,False,Strong delivery evidence supports contesting
+CB00274,contradictory_evidence,1791,product_not_received,delivered,True,not_issued,HUMAN_REVIEW,CONTEST,92.5,HUMAN_REVIEW,80,STRONG,True,Conflicting evidence detected
+CB00955,contradictory_evidence,7274,product_not_received,delivered,True,not_issued,HUMAN_REVIEW,CONTEST,93.5,HUMAN_REVIEW,80,STRONG,True,Conflicting evidence detected
+CB00792,strong_delivery_evidence,8319,product_not_received,delivered,True,not_issued,CONTEST,HUMAN_REVIEW,67.5,CONTEST,93,STRONG,False,Strong delivery evidence supports contesting
+CB00072,strong_delivery_evidence,8567,product_not_received,delivered,True,not_issued,CONTEST,HUMAN_REVIEW,53.0,CONTEST,93,STRONG,False,Strong delivery evidence supports contesting
+CB00722,contradictory_evidence,16544,product_not_received,delivered,True,not_issued,HUMAN_REVIEW,CONTEST,100.0,HUMAN_REVIEW,80,STRONG,True,Conflicting evidence detected
+CB00371,contradictory_evidence,2931,product_not_received,delivered,True,not_issued,HUMAN_REVIEW,CONTEST,100.0,HUMAN_REVIEW,80,STRONG,True,Conflicting evidence detected
+CB00644,contradictory_evidence,16081,product_not_received,delivered,True,not_issued,HUMAN_REVIEW,CONTEST,100.0,HUMAN_REVIEW,80,STRONG,True,Conflicting evidence detected
+CB00081,strong_delivery_evidence,17832,product_not_received,delivered,True,not_issued,CONTEST,HUMAN_REVIEW,85.0,CONTEST,93,STRONG,False,Strong delivery evidence supports contesting
+CB00271,contradictory_evidence,16776,product_not_received,delivered,True,not_issued,HUMAN_REVIEW,CONTEST,99.5,HUMAN_REVIEW,80,STRONG,True,Conflicting evidence detected
+CB00868,contradictory_evidence,16629,product_not_received,delivered,True,not_issued,HUMAN_REVIEW,CONTEST,100.0,HUMAN_REVIEW,80,STRONG,True,Conflicting evidence detected
+CB00965,contradictory_evidence,11154,product_not_received,delivered,True,not_issued,HUMAN_REVIEW,CONTEST,98.0,HUMAN_REVIEW,80,STRONG,True,Conflicting evidence detected
+CB00007,strong_delivery_evidence,9615,product_not_received,delivered,True,not_issued,CONTEST,HUMAN_REVIEW,63.0,CONTEST,93,STRONG,False,Strong delivery evidence supports contesting
+CB00204,contradictory_evidence,15898,product_not_received,delivered,True,not_issued,HUMAN_REVIEW,CONTEST,95.5,HUMAN_REVIEW,80,STRONG,True,Conflicting evidence detected
+CB00282,contradictory_evidence,956,product_not_received,delivered,True,not_issued,HUMAN_REVIEW,CONTEST,98.58,HUMAN_REVIEW,80,STRONG,True,Conflicting evidence detected
+CB00026,contradictory_evidence,18894,product_not_received,delivered,True,not_issued,HUMAN_REVIEW,CONTEST,58.0,HUMAN_REVIEW,80,STRONG,True,Conflicting evidence detected

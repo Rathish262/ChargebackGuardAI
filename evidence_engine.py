@@ -1,12 +1,35 @@
+from nlp_engine import NLPEngine
+
+
 class EvidenceEngine:
 
     def __init__(self):
+
         self.max_score = 100
+        self.nlp = NLPEngine()
+
+    # ==========================================
+    # TEXT HELPERS
+    # ==========================================
+
+    @staticmethod
+    def _contains_any(text, phrases):
+
+        return any(
+            phrase in text
+            for phrase in phrases
+        )
+
+    # ==========================================
+    # ANALYZE CASE
+    # ==========================================
 
     def analyze(self, case):
 
         score = 0
+
         reasons = []
+
         warnings = []
 
         contradiction_detected = False
@@ -38,6 +61,188 @@ class EvidenceEngine:
         merchant_message = str(
             case.get("merchant_message", "")
         ).strip().lower()
+
+        # ==========================================
+        # NLP ANALYSIS
+        # ==========================================
+
+        nlp_result = self.nlp.analyze(
+            customer_message,
+            merchant_message
+        )
+
+        customer_nlp = nlp_result["customer"]
+        merchant_nlp = nlp_result["merchant"]
+
+        nlp_contradiction = bool(
+            nlp_result.get(
+                "contradiction_detected",
+                False
+            )
+        )
+
+        nlp_contradiction_reasons = nlp_result.get(
+            "contradiction_reasons",
+            []
+        )
+
+        # ==========================================
+        # CUSTOMER RECEIPT STATUS
+        # ==========================================
+
+        customer_receipt_status = customer_nlp.get(
+            "receipt_status",
+            "UNKNOWN"
+        )
+
+        # ==========================================
+        # FALLBACK CUSTOMER DETECTION
+        # ==========================================
+
+        customer_non_receipt_detected = (
+            customer_nlp.get(
+                "non_receipt_detected",
+                False
+            )
+        )
+
+        customer_receipt_detected = (
+            customer_nlp.get(
+                "receipt_detected",
+                False
+            )
+        )
+
+        previous_confirmation_detected = (
+            customer_nlp.get(
+                "previous_confirmation_detected",
+                False
+            )
+        )
+
+        # Stronger fallback detection
+        if self._contains_any(
+            customer_message,
+            [
+                "did not receive",
+                "didn't receive",
+                "never received",
+                "not received",
+                "did not get",
+                "didn't get",
+                "never got"
+            ]
+        ):
+
+            customer_non_receipt_detected = True
+
+        if self._contains_any(
+            customer_message,
+            [
+                "i received",
+                "i got",
+                "i have received",
+                "package was received",
+                "order was received"
+            ]
+        ):
+
+            customer_receipt_detected = True
+
+        if self._contains_any(
+            customer_message,
+            [
+                "previously confirmed",
+                "previously said",
+                "previously stated",
+                "earlier confirmed",
+                "earlier said",
+                "earlier stated",
+                "confirmed receipt",
+                "confirmed that the order was received",
+                "confirmed that the product was received"
+            ]
+        ):
+
+            previous_confirmation_detected = True
+
+        # Determine customer status if NLP engine did not
+        if (
+            customer_non_receipt_detected
+            and previous_confirmation_detected
+        ):
+
+            customer_receipt_status = "CONFLICTING"
+
+        elif customer_receipt_status == "UNKNOWN":
+
+            if customer_receipt_detected:
+                customer_receipt_status = "RECEIVED"
+
+            elif customer_non_receipt_detected:
+                customer_receipt_status = "NOT_RECEIVED"
+
+            elif previous_confirmation_detected:
+                customer_receipt_status = "PREVIOUSLY_CONFIRMED"
+
+        # ==========================================
+        # MERCHANT RECEIPT / DELIVERY DETECTION
+        # ==========================================
+
+        merchant_delivery_confirmed = bool(
+            merchant_nlp.get(
+                "delivery_confirmed",
+                False
+            )
+        )
+
+        merchant_customer_received = bool(
+            merchant_nlp.get(
+                "customer_received",
+                False
+            )
+        )
+
+        # Fallback merchant detection
+        merchant_received_fallback = self._contains_any(
+            merchant_message,
+            [
+                "customer received",
+                "customer has received",
+                "customer already received",
+                "customer was received",
+                "customer previously received",
+                "customer confirmed receipt",
+                "customer confirmed",
+                "confirmed receipt",
+                "order was received by customer",
+                "package was received by customer",
+                "customer received the package",
+                "customer received the product",
+                "customer received the order"
+            ]
+        )
+
+        if merchant_received_fallback:
+
+            merchant_customer_received = True
+
+        merchant_delivery_fallback = self._contains_any(
+            merchant_message,
+            [
+                "delivery was completed",
+                "delivery completed",
+                "order was delivered",
+                "package was delivered",
+                "successfully delivered",
+                "delivery was successful",
+                "delivered successfully"
+            ]
+        )
+
+        if merchant_delivery_fallback:
+
+            merchant_delivery_confirmed = True
 
         # ==========================================
         # DELIVERY EVIDENCE
@@ -140,165 +345,115 @@ class EvidenceEngine:
             )
 
         # ==========================================
-        # CUSTOMER MESSAGE ANALYSIS
+        # NLP EVIDENCE
         # ==========================================
 
-        customer_not_received = any(
-            phrase in customer_message
-            for phrase in [
+        nlp_score = 0
 
-                "never received",
-                "did not receive",
-                "didn't receive",
-                "not received",
-                "have not received",
-                "haven't received",
+        if customer_receipt_status == "RECEIVED":
 
-                "never got",
-                "did not get",
-                "didn't get",
+            nlp_score += 10
 
-                "i do not have my order",
-                "i don't have my order",
+            reasons.append(
+                "NLP detected customer confirmation of receipt"
+            )
 
-                "order never arrived",
-                "order did not arrive",
-                "order didn't arrive",
+        elif customer_receipt_status == "NOT_RECEIVED":
 
-                "package never arrived",
-                "package did not arrive",
-                "package didn't arrive",
+            nlp_score += 3
 
-                "product never arrived",
-                "product did not arrive",
-                "product didn't arrive"
-            ]
-        )
+            reasons.append(
+                "NLP detected customer non-receipt claim"
+            )
 
-        # ==========================================
-        # CUSTOMER PREVIOUSLY CONFIRMED RECEIPT
-        # ==========================================
+        elif customer_receipt_status == "CONFLICTING":
 
-        customer_previous_receipt = any(
-            phrase in customer_message
-            for phrase in [
+            warnings.append(
+                "NLP detected conflicting receipt claims in customer message"
+            )
 
-                "previously confirmed receipt",
-                "previously confirmed that i received",
+        elif customer_receipt_status == "PREVIOUSLY_CONFIRMED":
 
-                "previously confirmed that the order was received",
-                "previously confirmed that the product was received",
-                "previously confirmed that the package was received",
+            warnings.append(
+                "NLP detected previous customer confirmation of receipt"
+            )
 
-                "previously said that i received",
-                "previously stated that i received",
+        if merchant_customer_received:
 
-                "earlier confirmed receipt",
-                "earlier confirmed that i received",
+            nlp_score += 7
 
-                "earlier said that i received",
-                "earlier stated that i received",
+            reasons.append(
+                "NLP detected merchant statement that customer received the order"
+            )
 
-                "confirmed receipt",
-                "confirmed that the order was received",
-                "confirmed that the product was received",
-                "confirmed that the package was received"
-            ]
-        )
+        elif merchant_delivery_confirmed:
+
+            reasons.append(
+                "NLP detected merchant delivery confirmation"
+            )
+
+        score += nlp_score
 
         # ==========================================
-        # CUSTOMER DIRECTLY CONFIRMS RECEIPT
+        # CONTRADICTION DETECTION
         # ==========================================
 
-        customer_received = any(
-            phrase in customer_message
-            for phrase in [
+        if nlp_contradiction:
 
-                "i received the product",
-                "i received my order",
-                "i received the order",
-                "i received my package",
-                "i received the package",
+            contradiction_detected = True
 
-                "i got the product",
-                "i got my order",
-                "i got the order",
-                "i got my package",
-                "i got the package",
+            for item in nlp_contradiction_reasons:
 
-                "i have received the product",
-                "i have received my order",
-                "i have received the order",
-                "i have received my package",
-                "i have received the package",
+                if item not in warnings:
+                    warnings.append(item)
 
-                "my order arrived",
-                "my package arrived",
-                "the package arrived",
-                "the order arrived",
-                "the product arrived",
+        # Customer says NOT received
+        # but merchant says customer received
+        if (
+            customer_non_receipt_detected
+            and merchant_customer_received
+        ):
 
-                "i got it",
-                "i received it"
-            ]
-        )
+            contradiction_detected = True
+
+            warning = (
+                "Customer claims non-receipt while merchant evidence indicates customer received the order"
+            )
+
+            if warning not in warnings:
+                warnings.append(warning)
+
+        # Customer says NOT received
+        # but customer previously confirmed receipt
+        if (
+            customer_non_receipt_detected
+            and previous_confirmation_detected
+        ):
+
+            contradiction_detected = True
+
+            warning = (
+                "Customer message contains both non-receipt and previous receipt confirmation"
+            )
+
+            if warning not in warnings:
+                warnings.append(warning)
 
         # ==========================================
-        # MERCHANT MESSAGE ANALYSIS
+        # DELIVERY VS CUSTOMER CLAIM
         # ==========================================
 
-        merchant_confirmed = any(
-            phrase in merchant_message
-            for phrase in [
+        if (
+            delivery_status == "delivered"
+            and customer_non_receipt_detected
+        ):
 
-                # Explicit confirmation
+            warning = (
+                "Customer disputes receipt despite delivery record showing delivered"
+            )
 
-                "customer confirmed receipt",
-                "customer confirmed that they received",
-                "customer confirmed that he received",
-                "customer confirmed that she received",
-
-                # Customer received item
-
-                "customer received the product",
-                "customer received the order",
-                "customer received the package",
-
-                "customer has received the product",
-                "customer has received the order",
-                "customer has received the package",
-
-                "customer got the product",
-                "customer got the order",
-                "customer got the package",
-
-                # Dataset edge-case wording
-
-                "customer was already received the package",
-                "customer already received the package",
-
-                # Previous confirmation
-
-                "customer previously confirmed receipt",
-                "customer previously confirmed that they received",
-
-                "customer previously confirmed that the order was received",
-                "customer previously confirmed that the product was received",
-                "customer previously confirmed that the package was received",
-
-                "customer earlier confirmed receipt",
-                "customer earlier confirmed that they received",
-
-                "customer earlier confirmed that the order was received",
-                "customer earlier confirmed that the product was received",
-
-                "customer previously said they received",
-                "customer previously said that they received",
-
-                "customer previously stated they received",
-                "customer previously stated that they received"
-            ]
-        )
+            if warning not in warnings:
+                warnings.append(warning)
 
         # ==========================================
         # COMMUNICATION SCORE
@@ -306,82 +461,19 @@ class EvidenceEngine:
 
         communication_score = 0
 
-        if customer_received:
+        if customer_receipt_status == "RECEIVED":
 
             communication_score += 8
 
-        elif customer_not_received:
+        elif customer_receipt_status == "NOT_RECEIVED":
 
             communication_score += 3
 
-        if merchant_confirmed:
+        if merchant_customer_received:
 
             communication_score += 7
 
-        # ==========================================
-        # CONTRADICTION DETECTION
-        # ==========================================
-
-        # CASE 1:
-        # Customer denies receipt but previously
-        # confirmed receipt.
-
-        if (
-            customer_not_received
-            and customer_previous_receipt
-        ):
-
-            contradiction_detected = True
-
-            warnings.append(
-                "Customer message contains conflicting receipt statements"
-            )
-
-        # CASE 2:
-        # Customer denies receipt but merchant says
-        # customer received/confirmed receipt.
-
-        if (
-            merchant_confirmed
-            and customer_not_received
-        ):
-
-            contradiction_detected = True
-
-            warnings.append(
-                "Merchant states customer previously confirmed receipt while customer denies receipt"
-            )
-
-        # CASE 3:
-        # Customer message itself contains both
-        # received and not-received claims.
-
-        if (
-            customer_received
-            and customer_not_received
-        ):
-
-            contradiction_detected = True
-
-            warnings.append(
-                "Customer message contains conflicting receipt claims"
-            )
-
-        # ==========================================
-        # DELIVERY VS CUSTOMER CLAIM
-        # ==========================================
-
-        # Delivered + customer denial is suspicious,
-        # but NOT automatically a contradiction.
-
-        if (
-            delivery_status == "delivered"
-            and customer_not_received
-        ):
-
-            warnings.append(
-                "Customer disputes receipt despite delivery record showing delivered"
-            )
+        score += communication_score
 
         # ==========================================
         # CONSISTENCY SCORE
@@ -389,47 +481,29 @@ class EvidenceEngine:
 
         consistency_score = 0
 
-        # Strong delivery evidence + customer denial.
-        # This is suspicious but not an explicit
-        # communication contradiction.
-
-        if (
-            delivery_status == "delivered"
-            and delivery_proof == "true"
-            and customer_not_received
-            and not contradiction_detected
-        ):
-
-            consistency_score = 20
-
-        # Explicit merchant/customer conflict.
-
-        elif (
-            merchant_confirmed
-            and customer_not_received
-        ):
+        if contradiction_detected:
 
             consistency_score = 0
 
-        # Customer confirms receipt.
-
         elif (
-            customer_received
-            and not customer_not_received
+            delivery_status == "delivered"
+            and delivery_proof == "true"
+            and customer_receipt_status == "NOT_RECEIVED"
         ):
 
             consistency_score = 20
 
-        # Delivery failed + customer says not received.
+        elif customer_receipt_status == "RECEIVED":
+
+            consistency_score = 20
 
         elif (
             delivery_status == "failed"
-            and customer_not_received
+            and customer_receipt_status == "NOT_RECEIVED"
         ):
 
             consistency_score = 20
 
-        score += communication_score
         score += consistency_score
 
         # ==========================================
@@ -458,7 +532,7 @@ class EvidenceEngine:
             evidence_level = "WEAK"
 
         # ==========================================
-        # RETURN RESULT
+        # RETURN
         # ==========================================
 
         return {
@@ -474,6 +548,33 @@ class EvidenceEngine:
 
             "warnings": warnings,
 
+            "nlp_analysis": {
+
+                "customer_receipt_status":
+                    customer_receipt_status,
+
+                "customer_non_receipt_detected":
+                    customer_non_receipt_detected,
+
+                "customer_receipt_detected":
+                    customer_receipt_detected,
+
+                "previous_confirmation_detected":
+                    previous_confirmation_detected,
+
+                "merchant_delivery_confirmed":
+                    merchant_delivery_confirmed,
+
+                "merchant_customer_received":
+                    merchant_customer_received,
+
+                "nlp_contradiction":
+                    nlp_contradiction,
+
+                "contradiction_reasons":
+                    nlp_contradiction_reasons
+            },
+
             "evidence_breakdown": {
 
                 "delivery_evidence":
@@ -488,157 +589,74 @@ class EvidenceEngine:
                 "communication_evidence":
                     communication_score,
 
+                "nlp_evidence":
+                    nlp_score,
+
                 "consistency":
                     consistency_score
             }
         }
 
 
-# ==========================================
-# LOCAL TEST
-# ==========================================
-
 if __name__ == "__main__":
 
     engine = EvidenceEngine()
 
-    test_cases = [
-
-        {
-            "dispute_id": "STRONG_TEST",
-
-            "amount": 5000,
-
-            "reason":
-                "product_not_received",
-
-            "delivery_status":
-                "delivered",
-
-            "delivery_proof":
-                "True",
-
-            "refund_status":
-                "not_issued",
-
-            "customer_message":
-                "I did not receive my order.",
-
-            "merchant_message":
-                "Delivery was completed and proof is available."
-        },
-
-        {
-            "dispute_id": "CONTRADICTION_TEST",
-
-            "amount": 5000,
-
-            "reason":
-                "product_not_received",
-
-            "delivery_status":
-                "delivered",
-
-            "delivery_proof":
-                "True",
-
-            "refund_status":
-                "not_issued",
-
-            "customer_message":
-                "I did not receive my order.",
-
-            "merchant_message":
-                "Customer previously confirmed that the order was received."
-        },
-
-        {
-            "dispute_id": "FAILURE_TEST",
-
-            "amount": 5000,
-
-            "reason":
-                "product_not_received",
-
-            "delivery_status":
-                "failed",
-
-            "delivery_proof":
-                "False",
-
-            "refund_status":
-                "not_issued",
-
-            "customer_message":
-                "I did not receive my order.",
-
-            "merchant_message":
-                "The delivery attempt failed."
-        }
-    ]
-
     print("===== CHARGEBACKGUARD AI =====")
-    print("Evidence Engine V7 Test")
+    print("Evidence Engine Test")
     print()
 
-    for case in test_cases:
+    case = {
 
-        result = engine.analyze(case)
+        "dispute_id": "TEST",
 
-        print("----------------------------------------")
+        "amount": 5000,
+
+        "reason": "product_not_received",
+
+        "delivery_status": "delivered",
+
+        "delivery_proof": "True",
+
+        "refund_status": "not_issued",
+
+        "customer_message":
+            "I did not receive my order.",
+
+        "merchant_message":
+            "Delivery was completed and proof is available."
+    }
+
+    result = engine.analyze(case)
+
+    print("Evidence Score:",
+          result["evidence_score"])
+
+    print("Evidence Level:",
+          result["evidence_level"])
+
+    print("Contradiction:",
+          result["contradiction_detected"])
+
+    print()
+
+    print("NLP Analysis:")
+
+    for key, value in result["nlp_analysis"].items():
 
         print(
-            "Dispute ID:",
-            case["dispute_id"]
+            " -",
+            key + ":",
+            value
         )
 
-        print(
-            "Evidence Score:",
-            result["evidence_score"],
-            "/ 100"
-        )
+    print()
 
-        print(
-            "Evidence Level:",
-            result["evidence_level"]
-        )
+    print("Warnings:")
 
-        print(
-            "Contradiction Detected:",
-            result["contradiction_detected"]
-        )
+    for warning in result["warnings"]:
 
-        print()
+        print(" -", warning)
 
-        print("Evidence Breakdown:")
-
-        for key, value in result[
-            "evidence_breakdown"
-        ].items():
-
-            print(
-                " -",
-                key + ":",
-                value
-            )
-
-        print()
-
-        print("Warnings:")
-
-        if result["warnings"]:
-
-            for warning in result["warnings"]:
-
-                print(
-                    " -",
-                    warning
-                )
-
-        else:
-
-            print(" - None")
-
-        print()
-
+    print()
     print("===== TEST COMPLETED =====")

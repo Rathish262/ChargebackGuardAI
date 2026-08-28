@@ -1,108 +1,131 @@
+import pytest
+
 from decision_engine import DecisionEngine
 
-engine = DecisionEngine()
 
-test_cases = [
+@pytest.fixture
+def engine():
+    return DecisionEngine()
 
-    {
-        "name": "Strong delivery",
-        "case": {
-            "reason": "product_not_received",
-            "delivery_status": "delivered",
-            "delivery_proof": "True",
-            "refund_status": "not_issued",
-            "customer_message": "I did not receive my order.",
-            "merchant_message": "Delivery was completed and proof is available."
-        },
-        "ml_prediction": "CONTEST",
-        "expected": "CONTEST"
-    },
 
-    {
-        "name": "Strong delivery + ML HUMAN_REVIEW",
-        "case": {
-            "reason": "product_not_received",
-            "delivery_status": "delivered",
-            "delivery_proof": "True",
-            "refund_status": "not_issued",
-            "customer_message": "I did not receive my order.",
-            "merchant_message": "Delivery was completed and proof is available."
-        },
-        "ml_prediction": "HUMAN_REVIEW",
-        "expected": "CONTEST"
-    },
+# =========================================================
+# TEST 1 — STRONG DELIVERY
+# =========================================================
 
-    {
-        "name": "Contradictory evidence",
-        "case": {
-            "reason": "product_not_received",
-            "delivery_status": "delivered",
-            "delivery_proof": "True",
-            "refund_status": "not_issued",
-            "customer_message": "I did not receive my order.",
-            "merchant_message": "Customer previously confirmed that the order was received."
-        },
-        "ml_prediction": "CONTEST",
-        "expected": "HUMAN_REVIEW"
-    },
+def test_strong_delivery(engine):
 
-    {
-        "name": "Delivery failure",
-        "case": {
-            "reason": "product_not_received",
-            "delivery_status": "failed",
-            "delivery_proof": "False",
-            "refund_status": "not_issued",
-            "customer_message": "I did not receive my order.",
-            "merchant_message": "The delivery attempt failed."
-        },
-        "ml_prediction": "DO_NOT_CONTEST",
-        "expected": "DO_NOT_CONTEST"
-    },
-
-    {
-        "name": "Weak evidence",
-        "case": {
-            "reason": "product_not_received",
-            "delivery_status": "unknown",
-            "delivery_proof": "False",
-            "refund_status": "not_issued",
-            "customer_message": "I did not receive my order.",
-            "merchant_message": "We cannot confirm delivery."
-        },
-        "ml_prediction": "CONTEST",
-        "expected": "HUMAN_REVIEW"
+    case = {
+        "reason": "product_not_received",
+        "delivery_status": "delivered",
+        "delivery_proof": "True",
+        "refund_status": "not_issued",
+        "customer_message": "I did not receive my order.",
+        "merchant_message":
+            "Delivery was completed and proof is available."
     }
-]
-
-print("===== CHARGEBACKGUARD AI =====")
-print("DECISION ENGINE TEST")
-print()
-
-passed = 0
-
-for test in test_cases:
 
     result = engine.decide(
-        test["case"],
-        test["ml_prediction"]
+        case,
+        "CONTEST"
     )
 
-    actual = result["decision"]
+    assert result["decision"] == "CONTEST"
 
-    status = "PASS" if actual == test["expected"] else "FAIL"
 
-    if status == "PASS":
-        passed += 1
+# =========================================================
+# TEST 2 — STRONG EVIDENCE SHOULD OVERRIDE ML REVIEW
+# =========================================================
 
-    print("----------------------------------------")
-    print("Test:", test["name"])
-    print("ML Prediction:", test["ml_prediction"])
-    print("Expected:", test["expected"])
-    print("Actual:", actual)
-    print("Result:", status)
+def test_strong_delivery_overrides_human_review(engine):
 
-print()
-print("========================================")
-print(f"PASSED: {passed}/{len(test_cases)}")
-print("========================================")
+    case = {
+        "reason": "product_not_received",
+        "delivery_status": "delivered",
+        "delivery_proof": "True",
+        "refund_status": "not_issued",
+        "customer_message": "I did not receive my order.",
+        "merchant_message":
+            "Delivery was completed and proof is available."
+    }
+
+    result = engine.decide(
+        case,
+        "HUMAN_REVIEW"
+    )
+
+    assert result["decision"] == "CONTEST"
+
+
+# =========================================================
+# TEST 3 — CONTRADICTORY EVIDENCE
+# =========================================================
+
+def test_contradictory_evidence_requires_human_review(engine):
+
+    case = {
+        "reason": "product_not_received",
+        "delivery_status": "delivered",
+        "delivery_proof": "True",
+        "refund_status": "not_issued",
+        "customer_message":
+            "I did not receive my order.",
+        "merchant_message":
+            "Customer previously confirmed that the order was received."
+    }
+
+    result = engine.decide(
+        case,
+        "CONTEST"
+    )
+
+    assert result["decision"] == "HUMAN_REVIEW"
+
+
+# =========================================================
+# TEST 4 — DELIVERY FAILURE
+# =========================================================
+
+def test_delivery_failure_should_not_contest(engine):
+
+    case = {
+        "reason": "product_not_received",
+        "delivery_status": "failed",
+        "delivery_proof": "False",
+        "refund_status": "not_issued",
+        "customer_message":
+            "I did not receive my order.",
+        "merchant_message":
+            "The delivery attempt failed."
+    }
+
+    result = engine.decide(
+        case,
+        "DO_NOT_CONTEST"
+    )
+
+    assert result["decision"] == "DO_NOT_CONTEST"
+
+
+# =========================================================
+# TEST 5 — WEAK EVIDENCE
+# =========================================================
+
+def test_weak_evidence_requires_human_review(engine):
+
+    case = {
+        "reason": "product_not_received",
+        "delivery_status": "unknown",
+        "delivery_proof": "False",
+        "refund_status": "not_issued",
+        "customer_message":
+            "I did not receive my order.",
+        "merchant_message":
+            "We cannot confirm delivery."
+    }
+
+    result = engine.decide(
+        case,
+        "CONTEST"
+    )
+
+    assert result["decision"] == "HUMAN_REVIEW"
