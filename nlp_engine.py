@@ -422,7 +422,6 @@ class NLPEngine:
             "duplicate_charge_claim":
                 duplicate
         }
-
     # =========================================================
     # COMPLETE NLP ANALYSIS
     # =========================================================
@@ -444,12 +443,13 @@ class NLPEngine:
         contradiction = False
         contradiction_reasons = []
 
-        # ---------------------------------------------------------
-        # Customer denies receipt + merchant says customer received
-        # ---------------------------------------------------------
+        # =====================================================
+        # 1. CUSTOMER DENIES RECEIPT
+        #    + MERCHANT SAYS CUSTOMER RECEIVED
+        # =====================================================
 
         if (
-            customer["receipt_status"] == "NOT_RECEIVED"
+            customer["non_receipt_detected"]
             and merchant["customer_received"]
         ):
 
@@ -459,13 +459,14 @@ class NLPEngine:
                 "Customer denies receipt while merchant states customer received the order"
             )
 
-        # ---------------------------------------------------------
-        # Previous confirmation conflict
-        # ---------------------------------------------------------
+        # =====================================================
+        # 2. CUSTOMER DENIES RECEIPT
+        #    + PREVIOUSLY CONFIRMED RECEIPT
+        # =====================================================
 
         if (
-            customer["receipt_status"]
-            == "PREVIOUSLY_CONFIRMED"
+            customer["non_receipt_detected"]
+            and customer["previous_confirmation_detected"]
         ):
 
             contradiction = True
@@ -474,13 +475,14 @@ class NLPEngine:
                 "Customer previously confirmed receipt but currently disputes receipt"
             )
 
-        # ---------------------------------------------------------
-        # Customer message contains conflicting claims
-        # ---------------------------------------------------------
+        # =====================================================
+        # 3. CUSTOMER MESSAGE CONTAINS BOTH
+        #    RECEIVED AND NOT RECEIVED CLAIMS
+        # =====================================================
 
         if (
-            customer["receipt_status"]
-            == "CONFLICTING"
+            customer["non_receipt_detected"]
+            and customer["receipt_detected"]
         ):
 
             contradiction = True
@@ -500,10 +502,7 @@ class NLPEngine:
 
             "contradiction_reasons":
                 contradiction_reasons
-        }
-
-
-# ================================================================
+        }# ================================================================
 # LOCAL TEST
 # ================================================================
 

@@ -1,0 +1,22 @@
+dispute_id,scenario,amount,reason,delivery_status,delivery_proof,refund_status,ground_truth,ml_prediction,final_decision,evidence_score,evidence_level,contradiction_detected,decision_reason
+CB00406,weak_evidence,7775,product_not_as_described,delivered,True,not_issued,HUMAN_REVIEW,HUMAN_REVIEW,CONTEST,100,STRONG,False,Strong delivery evidence supports contesting
+CB00217,weak_evidence,17505,product_not_as_described,delivered,True,not_issued,HUMAN_REVIEW,HUMAN_REVIEW,CONTEST,100,STRONG,False,Strong delivery evidence supports contesting
+CB00068,weak_evidence,19642,product_not_as_described,delivered,True,not_issued,HUMAN_REVIEW,HUMAN_REVIEW,CONTEST,100,STRONG,False,Strong delivery evidence supports contesting
+CB00225,weak_evidence,537,product_not_as_described,delivered,True,not_issued,HUMAN_REVIEW,HUMAN_REVIEW,CONTEST,100,STRONG,False,Strong delivery evidence supports contesting
+CB00571,weak_evidence,19608,product_not_as_described,delivered,True,not_issued,HUMAN_REVIEW,HUMAN_REVIEW,CONTEST,100,STRONG,False,Strong delivery evidence supports contesting
+CB00705,weak_evidence,14471,product_not_as_described,delivered,True,not_issued,HUMAN_REVIEW,HUMAN_REVIEW,CONTEST,100,STRONG,False,Strong delivery evidence supports contesting
+CB00168,weak_evidence,9350,product_not_as_described,delivered,True,not_issued,HUMAN_REVIEW,HUMAN_REVIEW,CONTEST,100,STRONG,False,Strong delivery evidence supports contesting
+CB00176,weak_evidence,13817,product_not_as_described,delivered,True,not_issued,HUMAN_REVIEW,HUMAN_REVIEW,CONTEST,100,STRONG,False,Strong delivery evidence supports contesting
+CB00908,weak_evidence,13524,product_not_as_described,delivered,True,not_issued,HUMAN_REVIEW,HUMAN_REVIEW,CONTEST,100,STRONG,False,Strong delivery evidence supports contesting
+CB00700,weak_evidence,3698,product_not_as_described,delivered,True,not_issued,HUMAN_REVIEW,HUMAN_REVIEW,CONTEST,100,STRONG,False,Strong delivery evidence supports contesting
+CB00465,weak_evidence,13546,product_not_as_described,delivered,True,not_issued,HUMAN_REVIEW,HUMAN_REVIEW,CONTEST,100,STRONG,False,Strong delivery evidence supports contesting
+CB00234,weak_evidence,14114,product_not_as_described,delivered,True,not_issued,HUMAN_REVIEW,HUMAN_REVIEW,CONTEST,100,STRONG,False,Strong delivery evidence supports contesting
+CB00907,weak_evidence,3184,product_not_as_described,delivered,True,not_issued,HUMAN_REVIEW,HUMAN_REVIEW,CONTEST,100,STRONG,False,Strong delivery evidence supports contesting
+CB00566,weak_evidence,3182,product_not_as_described,delivered,True,not_issued,HUMAN_REVIEW,HUMAN_REVIEW,CONTEST,100,STRONG,False,Strong delivery evidence supports contesting
+CB00128,weak_evidence,17472,product_not_as_described,delivered,True,not_issued,HUMAN_REVIEW,HUMAN_REVIEW,CONTEST,100,STRONG,False,Strong delivery evidence supports contesting
+CB00748,weak_evidence,12593,product_not_as_described,delivered,True,not_issued,HUMAN_REVIEW,HUMAN_REVIEW,CONTEST,100,STRONG,False,Strong delivery evidence supports contesting
+CB00045,weak_evidence,14855,product_not_as_described,delivered,True,not_issued,HUMAN_REVIEW,HUMAN_REVIEW,CONTEST,100,STRONG,False,Strong delivery evidence supports contesting
+CB00984,weak_evidence,13908,product_not_as_described,delivered,True,not_issued,HUMAN_REVIEW,HUMAN_REVIEW,CONTEST,100,STRONG,False,Strong delivery evidence supports contesting
+CB00987,weak_evidence,654,product_not_as_described,delivered,True,not_issued,HUMAN_REVIEW,HUMAN_REVIEW,CONTEST,100,STRONG,False,Strong delivery evidence supports contesting
+CB00028,weak_evidence,5032,product_not_as_described,delivered,True,not_issued,HUMAN_REVIEW,HUMAN_REVIEW,CONTEST,100,STRONG,False,Strong delivery evidence supports contesting
+CB00239,weak_evidence,19502,product_not_as_described,delivered,True,not_issued,HUMAN_REVIEW,HUMAN_REVIEW,CONTEST,100,STRONG,False,Strong delivery evidence supports contesting

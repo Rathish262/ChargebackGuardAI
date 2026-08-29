@@ -95,32 +95,25 @@ class EvidenceEngine:
             "UNKNOWN"
         )
 
+        customer_non_receipt_detected = customer_nlp.get(
+            "non_receipt_detected",
+            False
+        )
+
+        customer_receipt_detected = customer_nlp.get(
+            "receipt_detected",
+            False
+        )
+
+        previous_confirmation_detected = customer_nlp.get(
+            "previous_confirmation_detected",
+            False
+        )
+
         # ==========================================
         # FALLBACK CUSTOMER DETECTION
         # ==========================================
 
-        customer_non_receipt_detected = (
-            customer_nlp.get(
-                "non_receipt_detected",
-                False
-            )
-        )
-
-        customer_receipt_detected = (
-            customer_nlp.get(
-                "receipt_detected",
-                False
-            )
-        )
-
-        previous_confirmation_detected = (
-            customer_nlp.get(
-                "previous_confirmation_detected",
-                False
-            )
-        )
-
-        # Stronger fallback detection
         if self._contains_any(
             customer_message,
             [
@@ -130,7 +123,11 @@ class EvidenceEngine:
                 "not received",
                 "did not get",
                 "didn't get",
-                "never got"
+                "never got",
+                "never arrived",
+                "did not arrive",
+                "didn't arrive",
+                "never reached me"
             ]
         ):
 
@@ -160,16 +157,24 @@ class EvidenceEngine:
                 "earlier stated",
                 "confirmed receipt",
                 "confirmed that the order was received",
-                "confirmed that the product was received"
+                "confirmed that the product was received",
+                "confirmed that the package was received",
+                "earlier i confirmed"
             ]
         ):
 
             previous_confirmation_detected = True
 
-        # Determine customer status if NLP engine did not
+        # ==========================================
+        # CUSTOMER STATUS
+        # ==========================================
+
         if (
             customer_non_receipt_detected
-            and previous_confirmation_detected
+            and (
+                customer_receipt_detected
+                or previous_confirmation_detected
+            )
         ):
 
             customer_receipt_status = "CONFLICTING"
@@ -177,16 +182,19 @@ class EvidenceEngine:
         elif customer_receipt_status == "UNKNOWN":
 
             if customer_receipt_detected:
+
                 customer_receipt_status = "RECEIVED"
 
             elif customer_non_receipt_detected:
+
                 customer_receipt_status = "NOT_RECEIVED"
 
             elif previous_confirmation_detected:
+
                 customer_receipt_status = "PREVIOUSLY_CONFIRMED"
 
         # ==========================================
-        # MERCHANT RECEIPT / DELIVERY DETECTION
+        # MERCHANT DETECTION
         # ==========================================
 
         merchant_delivery_confirmed = bool(
@@ -203,7 +211,7 @@ class EvidenceEngine:
             )
         )
 
-        # Fallback merchant detection
+        # Merchant customer receipt fallback
         merchant_received_fallback = self._contains_any(
             merchant_message,
             [
@@ -211,6 +219,7 @@ class EvidenceEngine:
                 "customer has received",
                 "customer already received",
                 "customer was received",
+                "customer was already received",
                 "customer previously received",
                 "customer confirmed receipt",
                 "customer confirmed",
@@ -227,6 +236,7 @@ class EvidenceEngine:
 
             merchant_customer_received = True
 
+        # Merchant delivery fallback
         merchant_delivery_fallback = self._contains_any(
             merchant_message,
             [
@@ -234,15 +244,88 @@ class EvidenceEngine:
                 "delivery completed",
                 "order was delivered",
                 "package was delivered",
+                "product was delivered",
                 "successfully delivered",
                 "delivery was successful",
-                "delivered successfully"
+                "delivered successfully",
+                "reached the destination",
+                "order reached the destination",
+                "package reached the destination"
             ]
         )
 
         if merchant_delivery_fallback:
 
             merchant_delivery_confirmed = True
+
+        # ==========================================
+        # CONTRADICTION DETECTION
+        # ==========================================
+
+        if nlp_contradiction:
+
+            contradiction_detected = True
+
+            for item in nlp_contradiction_reasons:
+
+                if item not in warnings:
+
+                    warnings.append(item)
+
+        # Customer denies receipt
+        # + merchant says customer received
+
+        if (
+            customer_non_receipt_detected
+            and merchant_customer_received
+        ):
+
+            contradiction_detected = True
+
+            warning = (
+                "Customer claims non-receipt while merchant evidence "
+                "indicates customer received the order"
+            )
+
+            if warning not in warnings:
+
+                warnings.append(warning)
+
+        # Customer denies receipt
+        # + previous confirmation
+
+        if (
+            customer_non_receipt_detected
+            and previous_confirmation_detected
+        ):
+
+            contradiction_detected = True
+
+            warning = (
+                "Customer message contains both non-receipt "
+                "and previous receipt confirmation"
+            )
+
+            if warning not in warnings:
+
+                warnings.append(warning)
+
+        # Customer message contains both claims
+
+        if (
+            customer_non_receipt_detected
+            and customer_receipt_detected
+        ):
+
+            contradiction_detected = True
+
+            warning = (
+                "Customer message contains conflicting receipt claims"
+            )
+
+            if warning not in warnings:
+
+                warnings.append(warning)
 
         # ==========================================
         # DELIVERY EVIDENCE
@@ -395,67 +478,6 @@ class EvidenceEngine:
         score += nlp_score
 
         # ==========================================
-        # CONTRADICTION DETECTION
-        # ==========================================
-
-        if nlp_contradiction:
-
-            contradiction_detected = True
-
-            for item in nlp_contradiction_reasons:
-
-                if item not in warnings:
-                    warnings.append(item)
-
-        # Customer says NOT received
-        # but merchant says customer received
-        if (
-            customer_non_receipt_detected
-            and merchant_customer_received
-        ):
-
-            contradiction_detected = True
-
-            warning = (
-                "Customer claims non-receipt while merchant evidence indicates customer received the order"
-            )
-
-            if warning not in warnings:
-                warnings.append(warning)
-
-        # Customer says NOT received
-        # but customer previously confirmed receipt
-        if (
-            customer_non_receipt_detected
-            and previous_confirmation_detected
-        ):
-
-            contradiction_detected = True
-
-            warning = (
-                "Customer message contains both non-receipt and previous receipt confirmation"
-            )
-
-            if warning not in warnings:
-                warnings.append(warning)
-
-        # ==========================================
-        # DELIVERY VS CUSTOMER CLAIM
-        # ==========================================
-
-        if (
-            delivery_status == "delivered"
-            and customer_non_receipt_detected
-        ):
-
-            warning = (
-                "Customer disputes receipt despite delivery record showing delivered"
-            )
-
-            if warning not in warnings:
-                warnings.append(warning)
-
-        # ==========================================
         # COMMUNICATION SCORE
         # ==========================================
 
@@ -476,19 +498,24 @@ class EvidenceEngine:
         score += communication_score
 
         # ==========================================
-        # CONSISTENCY SCORE
+        # STRONG DELIVERY CONSISTENCY
+        # ==========================================
+        #
+        # Delivery + proof is strong evidence.
+        # Customer non-receipt alone should not destroy
+        # the strength of objective delivery evidence.
+        #
+        # A merchant/customer contradiction is handled
+        # separately and causes HUMAN_REVIEW in DecisionEngine.
         # ==========================================
 
         consistency_score = 0
 
-        if contradiction_detected:
-
-            consistency_score = 0
-
-        elif (
+        if (
             delivery_status == "delivered"
             and delivery_proof == "true"
             and customer_receipt_status == "NOT_RECEIVED"
+            and not merchant_customer_received
         ):
 
             consistency_score = 20
@@ -504,7 +531,35 @@ class EvidenceEngine:
 
             consistency_score = 20
 
+        elif (
+            delivery_status == "delivered"
+            and delivery_proof == "true"
+            and customer_non_receipt_detected
+            and not contradiction_detected
+        ):
+
+            consistency_score = 20
+
         score += consistency_score
+
+        # ==========================================
+        # STRONG DELIVERY BONUS
+        # ==========================================
+        #
+        # Objective delivery + proof should reach
+        # STRONG evidence even when customer disputes receipt.
+        # ==========================================
+
+        if (
+            delivery_status == "delivered"
+            and delivery_proof == "true"
+        ):
+
+            score += 20
+
+            reasons.append(
+                "Strong objective delivery evidence is available"
+            )
 
         # ==========================================
         # SCORE BOUNDARY
@@ -602,10 +657,6 @@ if __name__ == "__main__":
 
     engine = EvidenceEngine()
 
-    print("===== CHARGEBACKGUARD AI =====")
-    print("Evidence Engine Test")
-    print()
-
     case = {
 
         "dispute_id": "TEST",
@@ -628,6 +679,10 @@ if __name__ == "__main__":
     }
 
     result = engine.analyze(case)
+
+    print("===== CHARGEBACKGUARD AI =====")
+    print("Evidence Engine Test")
+    print()
 
     print("Evidence Score:",
           result["evidence_score"])
